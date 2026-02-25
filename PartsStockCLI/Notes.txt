@@ -1,0 +1,10 @@
+2/25/2026-
+I'm moving a little slow on this project so this is my first journal
+entry. But so far we've gotten a few simple classes set up
+and simple .txt IO. Tonight we got the path set up to
+store the .txt file under Documents. 
+
+I'd do some more coding or maybe even set up the Github repo, 
+but I need to wind down for bed for the night. 
+
+Until next time!
