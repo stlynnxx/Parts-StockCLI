@@ -8,3 +8,10 @@ I'd do some more coding or maybe even set up the Github repo,
 but I need to wind down for bed for the night. 
 
 Until next time!
+
+3/1/2026- 
+
+It's been a bit since I've been in this project so I spent some time here tonight. 
+I added some fields to the input and switched the write file from .txt to .json,
+essentially. I know there are better ways to implement what it is at this point even 
+but as I've been consumed by other projects,one step at a time. It'll get there. 
