@@ -15,3 +15,10 @@ It's been a bit since I've been in this project so I spent some time here tonigh
 I added some fields to the input and switched the write file from .txt to .json,
 essentially. I know there are better ways to implement what it is at this point even 
 but as I've been consumed by other projects,one step at a time. It'll get there. 
+
+3/2/2026-
+
+We started storage location logic; basically the end goal is the user being able to spin up custom named storage locations
+to be able to assign items to. So far we have the menu built, essentially. 
+
+I might try to work in here a bit more later today. 

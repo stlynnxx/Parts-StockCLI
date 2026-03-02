@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static PartsStockCLI.StorageLocations;
 
 namespace PartsStockCLI
 {
@@ -163,17 +164,9 @@ namespace PartsStockCLI
 
             public static void Search()
             {
-                Console.WriteLine("Search Term: ");
-                string searchTerm = Console.ReadLine();
-                string searchFor = itemData[0];
-                if (searchTerm == searchFor)
-                {
-                    Console.WriteLine("Item: itemData[0]");
-                }
-                else
-                {
-                    Console.WriteLine("Item not found!");
-                }
+                
+                StorageLocations storageLocations = new StorageLocations();
+                storageLocations.StorageMain();
 
 
 
