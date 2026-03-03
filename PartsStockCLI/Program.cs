@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -37,7 +38,8 @@ namespace PartsStockCLI
                                   "1) New Entry\n" +
                                   "2) Search\n" +
                                   "3) Stats\n" +
-                                  "4) Exit\n" +
+                                  "4) Storage Location Setup\n" +
+                                  "5) Exit\n" +
                                   "------------------------");
                 int userInput = Convert.ToInt32(Console.ReadLine());
                 return userInput;
@@ -51,6 +53,7 @@ namespace PartsStockCLI
                 Menu menu = new Menu();
                 Submit sub = new Submit();
                 Nums nums = new Nums();
+                StorageLocations storageLocations = new StorageLocations();
                 
                
                 int userIn = Menu.Home();
@@ -69,7 +72,10 @@ namespace PartsStockCLI
 
                         break;
                     case 4:
-                        Environment.Exit(0);
+                        storageLocations.StorageMain();
+                        break;
+                    case 5:
+                        
                         break;
                     default:
                         Console.WriteLine("Switch default error");
@@ -165,8 +171,7 @@ namespace PartsStockCLI
             public static void Search()
             {
                 
-                StorageLocations storageLocations = new StorageLocations();
-                storageLocations.StorageMain();
+                Console.WriteLine("Searching for items...");
 
 
 

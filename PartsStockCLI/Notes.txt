@@ -22,3 +22,9 @@ We started storage location logic; basically the end goal is the user being able
 to be able to assign items to. So far we have the menu built, essentially. 
 
 I might try to work in here a bit more later today. 
+
+I did come back for more; I added the storage menu and the skeleton for the tooling
+for creating a new storage location, although I'm hitting a bug in collecting the
+input for the new location.
+
+One thing at a time. But this will probably be it for today regardless. 
