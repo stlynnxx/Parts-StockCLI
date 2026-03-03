@@ -28,3 +28,9 @@ for creating a new storage location, although I'm hitting a bug in collecting th
 input for the new location.
 
 One thing at a time. But this will probably be it for today regardless. 
+
+3/3/2026-
+We got collecting the storage location input and appending it all to file worked out a
+bit more smoothly this morning, although it's all still a ways off from being usable.
+
+One thing at a time!

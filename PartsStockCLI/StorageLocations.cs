@@ -29,39 +29,55 @@ public class StorageLocations
             }
         }
 
+        StorageLocation CreateLocationFromInput()
+        {
+            Console.WriteLine("Location Name:");
+            string locationName = Console.ReadLine();
+            Console.WriteLine("Location City:");
+            string locationCity = Console.ReadLine();
+            Console.WriteLine("Location State:");
+            string locationState = Console.ReadLine();
+            Console.WriteLine("Location Country:");
+            string locationCountry = Console.ReadLine();
+            return new StorageLocation
+            {
+                LocationName = locationName,
+                LocationCity = locationCity,
+                LocationState = locationState,
+                LocationCountry = locationCountry
+            };
+        }
+
         void createLocation()
         {
+            int appendCounter = 0;
             string[] appends = new string[500];
-            
-            StorageLocation s = new StorageLocation();
-            Console.WriteLine("Location Name:");
-            string locName = Console.ReadLine();
-            s.LocationName = locName;
-            Console.WriteLine("Location City:");
-            string locCity = Console.ReadLine();
-            s.LocationCity = locCity;
-            string locState = Console.ReadLine();
-            s.LocationState = locState;
-            string locCountry = Console.ReadLine();
-            s.LocationCountry = locCountry;
+            var s = CreateLocationFromInput();
             appends[0] = s.LocationName;
+            appendCounter++;
             appends[1] = s.LocationCity;
+            appendCounter++;
             appends[2] = s.LocationState;
+            appendCounter++;
             appends[3] = s.LocationCountry;
-            
+            appendCounter++;
+            appends[4] = " ";
+            appendCounter++;
             
             
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "Locations.json");
-            if (path == null)
+                "Locations2.json");
+            File.AppendAllLines(path, appends.Take(appendCounter));
+            /* int length = appends.Length;
+            string currentAppend;
+            for (int i = 0; i < appendCounter; i++)
             {
-                File.Create(path).Close();
-            }
-            int length = appends.Length;
-            for (int i = 0; i < length; i++)
-            {
-                File.Delete(Path.Combine(path, appends[i]));
-            }
+                currentAppend = appends[i];
+                File.AppendAllLines(path, [currentAppend]);
+                
+                
+            }*/
+            
             
 
         }
