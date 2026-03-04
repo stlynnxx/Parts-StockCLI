@@ -1,3 +1,5 @@
+using System.Xml;
+
 namespace PartsStockCLI;
 
 public class StorageLocations
@@ -5,10 +7,10 @@ public class StorageLocations
     public void StorageMain()
     {
         
-        string borderDashes = "----";
+        string borderDashes = "--------";
         
         int routingNum = StorageMenu(borderDashes);
-        Routing(routingNum);
+        Routing(routingNum, borderDashes);
 
         void LoadLocation()
         {
@@ -33,6 +35,8 @@ public class StorageLocations
         {
             Console.WriteLine("Location Name:");
             string locationName = Console.ReadLine();
+            Console.WriteLine("Details: ");
+            string details = Console.ReadLine();
             Console.WriteLine("Location City:");
             string locationCity = Console.ReadLine();
             Console.WriteLine("Location State:");
@@ -42,47 +46,57 @@ public class StorageLocations
             return new StorageLocation
             {
                 LocationName = locationName,
+                Details =  details,
                 LocationCity = locationCity,
                 LocationState = locationState,
                 LocationCountry = locationCountry
             };
         }
 
-        void createLocation()
+        void createLocation(string borderDashses)
         {
             int appendCounter = 0;
             string[] appends = new string[500];
             var s = CreateLocationFromInput();
-            appends[0] = s.LocationName;
+            StreamWriter file = new StreamWriter("LocationsFile.json");
+            
+            // The border dashes demlit the location entries
+            appends[0] = borderDashes;
             appendCounter++;
-            appends[1] = s.LocationCity;
+            appends[1] = s.LocationName;
             appendCounter++;
-            appends[2] = s.LocationState;
+            appends[2] = s.Details;
             appendCounter++;
-            appends[3] = s.LocationCountry;
+            appends[3] = s.LocationCity;
             appendCounter++;
-            appends[4] = " ";
+            appends[4] = s.LocationState;
+            appendCounter++;
+            appends[5] = s.LocationCountry;
+            appendCounter++;
+            appends[6] = borderDashes;
             appendCounter++;
             
             
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "Locations2.json");
-            File.AppendAllLines(path, appends.Take(appendCounter));
+                "LocationsFile.json");
+            File.AppendAllText(path, string.Join(Environment.NewLine, appends));
+            
+            
             /* int length = appends.Length;
             string currentAppend;
             for (int i = 0; i < appendCounter; i++)
             {
                 currentAppend = appends[i];
                 File.AppendAllLines(path, [currentAppend]);
-                
-                
+
+
             }*/
-            
-            
+
+
 
         }
 
-        void Routing(int routeNum)
+        void Routing(int routeNum, string borderDashes)
         {
             switch (routeNum)
             {
@@ -93,7 +107,7 @@ public class StorageLocations
                     // Edit Storage Location
                     break;
                 case 3:
-                    createLocation();
+                    createLocation(borderDashes);
                     break;
                 default:
                     break;
@@ -140,6 +154,7 @@ public class StorageLocations
     public class StorageLocation()
     {
         private string locationName;
+        private string details;
         private string locationCity;
         private string locationState;
         private string locationCountry;
@@ -148,6 +163,13 @@ public class StorageLocations
             get { return this.locationName; }
             set { this.locationName = value; }
         }
+
+        public string Details
+        {
+            get { return this.details; }
+            set { this.details = value; }
+        }
+
         public string LocationCity {
             get { return this.locationCity; }
             set { this.locationCity = value; }

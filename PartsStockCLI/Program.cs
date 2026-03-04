@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static PartsStockCLI.StorageLocations;
+
 
 namespace PartsStockCLI
 {
@@ -15,7 +15,7 @@ namespace PartsStockCLI
             Route r = new Route();
             Display display = new Display();
             Display.Art();
-            Route.Routed();
+            r.Routed();
 
         }
 
@@ -48,19 +48,20 @@ namespace PartsStockCLI
 
         class Route
         {
-            public static void Routed()
+            public void Routed()
             {
                 Menu menu = new Menu();
                 Submit sub = new Submit();
                 Nums nums = new Nums();
                 StorageLocations storageLocations = new StorageLocations();
+                AddItem add = new AddItem();
                 
                
                 int userIn = Menu.Home();
                 switch (userIn)
                 {
                     case 1:
-                        Submit.Submission();
+                        add.NewItem();
                         break;
                     case 2:
                         Console.WriteLine("You chose two");
@@ -77,8 +78,13 @@ namespace PartsStockCLI
                     case 5:
                         
                         break;
-                    default:
-                        Console.WriteLine("Switch default error");
+                    
+                        case 6:
+                            File.Delete("Items.json");
+                            break;
+                       
+                            default:
+                            Console.WriteLine("Switch default error");
                         break;
 
                 }

@@ -34,3 +34,13 @@ We got collecting the storage location input and appending it all to file worked
 bit more smoothly this morning, although it's all still a ways off from being usable.
 
 One thing at a time!
+
+3/4/2026-
+
+I should at least add the option to set/change a default country to be "autofilled", if not also State and/or city
+for the storage locations.
+
+This morning I moved adding a new item out of program and got the item entries appended to the json
+file a bit more cleanly. We smoothed out StorageLocations a bit more as well.
+
+There's still a lot to be done!
