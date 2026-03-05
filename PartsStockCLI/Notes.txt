@@ -44,3 +44,6 @@ This morning I moved adding a new item out of program and got the item entries a
 file a bit more cleanly. We smoothed out StorageLocations a bit more as well.
 
 There's still a lot to be done!
+
+I came back a bit later and added the start for Sourcing locations and smoothed out the input collection and
+appending in the other sections 

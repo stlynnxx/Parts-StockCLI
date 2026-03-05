@@ -31,21 +31,14 @@ public class AddItem
 
             string[] appends = new string[25];
             appends[0] = "--------";
-            appends[1] = "Item Name: ";
-            appends[2] = itemName;
-            appends[3] = "Item Description: ";
-            appends[4] = itemDescription;
-            appends[5] = "Item Price: "; 
-            appends[6] = itemPrice.ToString();
-            appends[7] = "Item Quantity: ";
-            appends[8] = itemQuantity.ToString();
-            appends[9] = "Item Stock: ";
-            appends[10] = itemStock.ToString();
-            appends[11] = "Item PurchaseDate: ";
-            appends[12] = itemPurchaseDate;
-            appends[13] = "Item PurchasePrice: ";
-            appends[14] = itemPurchasePrice.ToString();
-            appends[15] = "--------";
+            appends[1] = $"Item Name: {itemName}";
+            appends[2] = $"Item Description:  {itemDescription}";
+            appends[3] = $"Item Price: {itemPrice}"; 
+            appends[4] = $"Item Quantity: {itemQuantity}";
+            appends[5] = $"Item Stock: {itemStock}";
+            appends[6] = $"Item PurchaseDate: {itemPurchaseDate}";
+            appends[7] = $"Item PurchasePrice: {itemPurchasePrice}";
+            
             File.AppendAllText(path, string.Join(Environment.NewLine, appends));
             
             

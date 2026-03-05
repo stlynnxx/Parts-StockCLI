@@ -31,8 +31,12 @@ public class StorageLocations
             }
         }
 
-        StorageLocation CreateLocationFromInput()
+        
+
+        void createLocation(string borderDashses)
         {
+            string[] appends = new string[500];
+            
             Console.WriteLine("Location Name:");
             string locationName = Console.ReadLine();
             Console.WriteLine("Details: ");
@@ -43,38 +47,15 @@ public class StorageLocations
             string locationState = Console.ReadLine();
             Console.WriteLine("Location Country:");
             string locationCountry = Console.ReadLine();
-            return new StorageLocation
-            {
-                LocationName = locationName,
-                Details =  details,
-                LocationCity = locationCity,
-                LocationState = locationState,
-                LocationCountry = locationCountry
-            };
-        }
-
-        void createLocation(string borderDashses)
-        {
-            int appendCounter = 0;
-            string[] appends = new string[500];
-            var s = CreateLocationFromInput();
-            StreamWriter file = new StreamWriter("LocationsFile.json");
             
             // The border dashes demlit the location entries
             appends[0] = borderDashes;
-            appendCounter++;
-            appends[1] = s.LocationName;
-            appendCounter++;
-            appends[2] = s.Details;
-            appendCounter++;
-            appends[3] = s.LocationCity;
-            appendCounter++;
-            appends[4] = s.LocationState;
-            appendCounter++;
-            appends[5] = s.LocationCountry;
-            appendCounter++;
-            appends[6] = borderDashes;
-            appendCounter++;
+            appends[1] = $"Location Name: {locationName}";
+            appends[2] = $"Details: {details}";
+            appends[3] = $"Location City: {locationCity}";
+            appends[4] = $"Location State: {locationState}";
+            appends[5] = $"Location Country: {locationCountry}";
+            
             
             
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),

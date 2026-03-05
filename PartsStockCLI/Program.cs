@@ -37,7 +37,7 @@ namespace PartsStockCLI
                 Console.WriteLine("-------------------------\n" +
                                   "1) New Entry\n" +
                                   "2) Search\n" +
-                                  "3) Stats\n" +
+                                  "3) Sourcing\n" +
                                   "4) Storage Location Setup\n" +
                                   "5) Exit\n" +
                                   "------------------------");
@@ -55,6 +55,7 @@ namespace PartsStockCLI
                 Nums nums = new Nums();
                 StorageLocations storageLocations = new StorageLocations();
                 AddItem add = new AddItem();
+                Sourcing sourcing = new Sourcing();
                 
                
                 int userIn = Menu.Home();
@@ -68,9 +69,7 @@ namespace PartsStockCLI
                         Submit.Search();
                         break;
                     case 3:
-                        Console.WriteLine("You chose three");
-                        Nums.Stats();
-
+                        sourcing.Main();
                         break;
                     case 4:
                         storageLocations.StorageMain();
