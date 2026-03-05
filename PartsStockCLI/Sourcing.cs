@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace PartsStockCLI;
@@ -6,6 +7,8 @@ public class Sourcing
 {
     public void Main()
     {
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "Sourcing.json");
         string dashes = "--------";
         Menu(dashes);
         string userInput = Console.ReadLine();
@@ -13,9 +16,10 @@ public class Sourcing
         {
             case "1":
                 Console.WriteLine("You chose one");
-                AddSourcingLocation(dashes);
+                AddSourcingLocation(dashes, path);
                 break;
             case "2":
+                LoadSourcingLocation(LoadInterface(), path, path );
                 Console.WriteLine("You chose two");
                 break;
             case "3":
@@ -46,7 +50,7 @@ public class Sourcing
         Console.WriteLine(dashes);
     }
 
-    void AddSourcingLocation(string dashes)
+    void AddSourcingLocation(string dashes, string path)
     {
         string[] appends = new string[500];
         Console.WriteLine("Location Name: ");
@@ -59,8 +63,7 @@ public class Sourcing
         string locationState = Console.ReadLine();
         Console.WriteLine("Location Country: ");
         string locationCountry = Console.ReadLine();
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "Sourcing.json");
+        
         if (!File.Exists(path))
         {
             File.Create(path).Close();
@@ -76,6 +79,30 @@ public class Sourcing
         File.AppendAllLines(path, appends);
 
     }
+
+    string LoadInterface()
+    {
+        Console.WriteLine("Which location would you like to load?");
+        string userIn = Console.ReadLine();
+        return userIn;
+
+    }
+
+    void LoadSourcingLocation(string searchParmeter, string dashes, string path)
+    {
+        
+        
+        string loadedFile = File.ReadAllText(path);
+        if (loadedFile.Contains(searchParmeter))
+        {
+            Console.WriteLine("Search successful");
+            // From here we need to get what we're searching for specifically 
+            // from the loaded file
+            Console.WriteLine(loadedFile);
+        }
+    } 
+    
+
     public class SourcingLocation
     {
         private string locationName;
