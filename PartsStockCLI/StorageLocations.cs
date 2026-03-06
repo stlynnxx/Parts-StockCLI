@@ -6,34 +6,86 @@ public class StorageLocations
 {
     public void StorageMain()
     {
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "LocationsFile.json");
         
         string borderDashes = "--------";
         
-        int routingNum = StorageMenu(borderDashes);
-        Routing(routingNum, borderDashes);
-
-        void LoadLocation()
+        StorageMenu(path, borderDashes);
+        
+        // If a user wants to load a location, this menu is called for the load parameter
+        void LoadLocationMenu(string path, string borderDash)
         {
             Console.WriteLine("1)Location List\n" +
                               "2)Search by Location Name\n");
             string userIn = Console.ReadLine();
-            if (userIn == "1")
+            switch (userIn)
             {
-                Console.WriteLine("Location List Chosen");
+                case "1":
+                    Console.WriteLine(LoadList(path));
+                    break;
+                case "2":
+                    SearchByName(path, borderDash);
+                    
+                    break;
+                default:
+                    Console.WriteLine("Invalid Input");
+                    break;
+                
             }
-            else if (userIn == "2")
+            
+        }
+        // This is going to be for loading the entire Storage Locations list
+        string LoadList(string path)
+        {   string load = File.ReadAllText(path);
+            return load;
+        }
+        // This will be for searching for a specific storage location via name
+        void SearchByName(string path, string borderDash)
+        {
+            string[] appends = new string[50];
+            Console.WriteLine("Enter the name to search by: ");
+            string userInput = Console.ReadLine();
+            //string loadedFile = LoadList(path);
+            using (StreamReader sr = new StreamReader(path))
             {
-                Console.WriteLine("Search by Location Name");
+                string line;
+                string fullFile = sr.ReadToEnd();
+                int fileLen =  fullFile.Length;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    
+                    if (line.Contains(userInput))
+                    {
+                        
+                        appends[0] = line;
+                        for (int i = 1; i < fileLen; i++)
+                        {
+                            line = sr.ReadLine();
+                            appends[i] = line;
+
+
+                            if (line.Contains(borderDash))
+                            {
+                                i = fileLen + 1;
+
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }   
+            Console.WriteLine("WriteLine Reached");
+            for (int k = 0; k < appends.Length; k++) {
+                Console.WriteLine(appends[k]);
             }
-            else
-            {
-                Console.WriteLine("LoadLocation.UserInput Error");
-            }
+
+            
         }
 
-        
-
-        void createLocation(string borderDashses)
+        // This is for creating a new storage location
+        void createLocation(string path, string borderDashses)
         {
             string[] appends = new string[500];
             
@@ -58,8 +110,7 @@ public class StorageLocations
             
             
             
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "LocationsFile.json");
+            
             File.AppendAllText(path, string.Join(Environment.NewLine, appends));
             
             
@@ -77,28 +128,10 @@ public class StorageLocations
 
         }
 
-        void Routing(int routeNum, string borderDashes)
+        // This is where the user decides what they want to do 
+        void StorageMenu(string path, string borderDash)
         {
-            switch (routeNum)
-            {
-                case 1:
-                    // Load Storage Location
-                    break;
-                case 2:
-                    // Edit Storage Location
-                    break;
-                case 3:
-                    createLocation(borderDashes);
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-        static int StorageMenu(string borderDash)
-        {
-            int routingNum;
+            
             string storageMenu = "1)Load Storage Location\n" +
                                   "2)Edit Storage Location\n" +
                                  "3)Create New Storage Location\n";
@@ -110,23 +143,19 @@ public class StorageLocations
             string userInput = Console.ReadLine();
                 switch (userInput) {
                     case "1": 
-                        routingNum = 1;
-                        Console.WriteLine("You chose 1");
+                        LoadLocationMenu(path, borderDash);
                     break;
                     case "2":
-                        routingNum = 2;
                         Console.WriteLine("You chose 2");
                     break;
                     case "3":
-                        routingNum = 3;
-                        Console.WriteLine("You chose 3");
+                        createLocation(path, borderDash); 
                     break;
                     default:
-                        routingNum = 0;
                         Console.WriteLine("Invalid Input");
                     break;
             }
-                return routingNum;
+                
             
 }
 

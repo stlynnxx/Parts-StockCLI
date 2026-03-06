@@ -47,3 +47,17 @@ There's still a lot to be done!
 
 I came back a bit later and added the start for Sourcing locations and smoothed out the input collection and
 appending in the other sections 
+
+3/5/2026-
+
+I've just been doing some more smoothing out not unlike yesterday's work today in addition 
+to starting the search for storage function by name logic; we are at the point to where we 
+are parsing through the file of storage locations in search of the name we are searching for.
+I know i'm using a file stream I just need to piece together all of the pieces still. 
+
+Okay, so I got searching through the file set up and I have some logic that attempts to append
+the pulled lines between the found search term and the next delimiter to an appends array
+and then print them to the screen and we can get through the entire method successfully 
+but whenever I print appends it seems to be empty, so. 
+
+There's my next starting point for whenever I come back next. 
