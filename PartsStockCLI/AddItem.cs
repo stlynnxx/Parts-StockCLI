@@ -37,7 +37,7 @@ public class AddItem
             appends[4] = $"Item Quantity: {itemQuantity}";
             appends[5] = $"Item Stock: {itemStock}";
             appends[6] = $"Item PurchaseDate: {itemPurchaseDate}";
-            appends[7] = $"Item PurchasePrice: {itemPurchasePrice}";
+            
             
             File.AppendAllText(path, string.Join(Environment.NewLine, appends));
             
@@ -53,15 +53,14 @@ public class AddItem
             Console.WriteLine("Item Description: ");
             ItemDescription = Console.ReadLine();
             Console.WriteLine("Item Price: NUMS ONLY ");
-            ItemPrice = int.Parse(Console.ReadLine());
+            ItemPrice = Console.ReadLine();
             Console.WriteLine("Item Quantity: NUMS ONLY ");
             ItemQuantity = int.Parse(Console.ReadLine());
             Console.WriteLine("Item Stock: NUMS ONLY ");
             ItemStock = int.Parse(Console.ReadLine());
             Console.WriteLine("Item PurchaseDate: ");
             ItemPurchaseDate = Console.ReadLine();
-            Console.WriteLine("Item PurchasePrice: ");
-            ItemPurchasePrice = int.Parse(Console.ReadLine());
+            
             Console.WriteLine("--------");
             appender();
         }
@@ -76,11 +75,11 @@ public class AddItem
 
     private string itemName;
         private string itemDescription;
-        private int itemPrice;
+        private string itemPrice;
         private int itemQuantity;
         private int itemStock;
         private string itemPurchaseDate;
-        private int itemPurchasePrice;
+        
         
         public string ItemName 
         {
@@ -93,7 +92,7 @@ public class AddItem
             get { return itemDescription; }
             set { itemDescription = value; }
         }
-        public int ItemPrice
+        public string ItemPrice
         {
             get { return itemPrice; }
             set { itemPrice = value; }
@@ -113,11 +112,7 @@ public class AddItem
             get { return itemPurchaseDate; }
             set { itemPurchaseDate = value; }
         }
-        public int ItemPurchasePrice
-        {
-            get { return itemPurchasePrice; }
-            set { itemPurchasePrice = value; }
-        }
+       
         
         
 

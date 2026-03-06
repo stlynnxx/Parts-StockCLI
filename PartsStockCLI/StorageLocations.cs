@@ -49,17 +49,24 @@ public class StorageLocations
             //string loadedFile = LoadList(path);
             using (StreamReader sr = new StreamReader(path))
             {
-                string line;
-                string fullFile = sr.ReadToEnd();
-                int fileLen =  fullFile.Length;
+                string line = sr.ReadLine();
+                // string fullFile = sr.ReadToEnd();
+                // int fileLen =  fullFile.Length;
+                if (line == null)
+                {
+                    Console.WriteLine($"Line Null, line: {line}");
+                }
+
                 while ((line = sr.ReadLine()) != null)
                 {
+                    Console.WriteLine($"line check: {line}");
+                    Console.WriteLine("Line check level");
                     
                     if (line.Contains(userInput))
                     {
                         
                         appends[0] = line;
-                        for (int i = 1; i < fileLen; i++)
+                        for (int i = 1; i < appends.Length; i++)
                         {
                             line = sr.ReadLine();
                             appends[i] = line;
@@ -67,7 +74,7 @@ public class StorageLocations
 
                             if (line.Contains(borderDash))
                             {
-                                i = fileLen + 1;
+                                i = appends.Length + 1;
 
                             }
                         }

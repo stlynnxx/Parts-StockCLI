@@ -61,3 +61,21 @@ and then print them to the screen and we can get through the entire method succe
 but whenever I print appends it seems to be empty, so. 
 
 There's my next starting point for whenever I come back next. 
+
+3/6/2026-
+
+I figured out why appends was coming up empty and got the entire location selection printed
+on screen. It still needs input protections and to be prettified a bit, but, it does
+technically work!
+
+Progress is progress!
+
+We changed the item price in the new item submission process to a string for 
+fluidity's sake.
+
+we also removed itemPurchasePrice as it was redundant and I think I autofilled it in without
+realizing. 
+
+I also sculpted out a basic search by item name for doing just that. Soon I'll stop adding simple
+features like this and start refining the ones I have and then move forward with more 
+advanced features. 

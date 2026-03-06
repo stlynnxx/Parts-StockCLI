@@ -35,8 +35,8 @@ namespace PartsStockCLI
             public static int Home()
             {
                 Console.WriteLine("-------------------------\n" +
-                                  "1) New Entry\n" +
-                                  "2) Search\n" +
+                                  "1) New Item\n" +
+                                  "2) Item Search\n" +
                                   "3) Sourcing\n" +
                                   "4) Storage Location Setup\n" +
                                   "5) Exit\n" +
@@ -173,14 +173,6 @@ namespace PartsStockCLI
                 }
             }
 
-            public static void Search()
-            {
-                
-                Console.WriteLine("Searching for items...");
-
-
-
-            }
 
            
 
