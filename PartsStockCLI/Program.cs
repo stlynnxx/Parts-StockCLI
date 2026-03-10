@@ -67,13 +67,6 @@ namespace PartsStockCLI
 
             public void Routed()
             {
-                
-                
-                
-                
-                Menu menu = new Menu();
-                Submit sub = new Submit();
-                Nums nums = new Nums();
                 StorageLocations storageLocations = new StorageLocations();
                 AddItem add = new AddItem();
                 Sourcing sourcing = new Sourcing();
@@ -120,102 +113,9 @@ namespace PartsStockCLI
             }
         }
 
-        class Submit
-        {
-            private static string[] itemData;
-
-            public static void Submission()
-            {
-                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    "items.json");
-                if (path == null)
-                {
-                    File.Create(path).Close();
-                }
-                else
-                {
-                    string nameTag = "Item name: ";
-                    string descriptionTag = "Item description: ";
-                    string storageTag = "Storage Location: ";
-                    string purchaseTag = "Purchase Price: ";
-                    string soldTag = "Sold? (Y|N)";
-                    bool soldBool = false;
-                    string ssoldBool = "";
-                    Console.WriteLine(nameTag);
-                    string itemName = Console.ReadLine();
-                    Console.WriteLine(descriptionTag);
-                    string itemScript = Console.ReadLine();
-                    Console.WriteLine(storageTag);
-                    string itemStorage = Console.ReadLine();
-                    Console.WriteLine(purchaseTag);
-                    string purchasePrice = Console.ReadLine();
-                    Console.WriteLine(soldTag);
-                    string soldAns = Console.ReadLine();
-                    string upAns = soldAns.ToUpper();
-                    string soldPrice = "";
-                    
-                    if (upAns == "Y")
-                    { 
-                        soldBool = true;
-                        ssoldBool = "SOLD";
-                        
-                        
-                    }
-                    else
-                    {
-                        soldBool = false;
-                        ssoldBool = "Unsold";
-                    }
-
-                    Dictionary<int, string> itemData =  new Dictionary<int, string>();
-                    itemData.Add(0, itemName);
-                    itemData.Add(1, itemScript);
-                    itemData.Add(2, itemStorage);
-                    itemData.Add(3, purchasePrice);
-                    itemData.Add(4, ssoldBool);
-                    // string addr = $"itemName ={itemName};itemScript={itemScript};itemStorage={itemStorage};";
-                    string addrOne = $"Item Name: {itemName}";
-                    string addrTwo = $"Description: {itemScript}";
-                    string addrThree = $"Storage Location: {itemStorage}";
-                    string addrFour = $"Purchase Price: {purchasePrice}";
-                    string addrFive = $"Sold?: {ssoldBool}";
-                    if (upAns == "Y")
-                    {
-                        Console.WriteLine("Sold Price: ");
-                        soldPrice =  Console.ReadLine();
-                    }
-                    else
-                    {
-                        soldPrice = "Unsold";
-
-                    }
-
-                    string addrSix = $"Sold Price:  {soldPrice}";
-
-                    string jsonOne = JsonSerializer.Serialize(addrOne);
-                    string jsonTwo = JsonSerializer.Serialize(addrTwo);
-                    string jsonThree = JsonSerializer.Serialize(addrThree);
-                    string jsonFour = JsonSerializer.Serialize(addrFour);
-                    string jsonFive = JsonSerializer.Serialize(addrFive);
-                    string jsonSix = JsonSerializer.Serialize(addrSix);
-                    string[] jsonAppends = {jsonOne, jsonTwo, jsonThree, jsonFour, jsonFive, jsonSix};
-                    File.AppendAllLines(path, jsonAppends);
-                }
-            }
-
-
-           
-
-        }
-        public class Nums
-        {
-            public static void Stats()
-            {
-                Console.WriteLine("Stats!");
-            }
         }
 
     }
 
-}
+
 
