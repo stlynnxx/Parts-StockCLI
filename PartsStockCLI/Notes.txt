@@ -79,3 +79,24 @@ realizing.
 I also sculpted out a basic search by item name for doing just that. Soon I'll stop adding simple
 features like this and start refining the ones I have and then move forward with more 
 advanced features. 
+
+3/9/2026- It's been a few days since I've been in this project so I'm just pecking around
+in this super rough item search I left for myself. I do think I mentioned that it was basic.
+
+That would be a compliment, if I did.
+
+Right now while (line != null) is throwing us into an infinite loop, so, I think that's a valuable 
+place to spend some time at. 
+
+I got distracted, I wanted to empty out the ItemList file and just simply deleted and tried to
+add a new item which would create a new ItemList file in the process but I couldn't find the new
+file being made anywhere. I eventually did, I'm still a bit confused overall as to why it 
+wasn't coming up in the search, but, oh well. We'll blame it on Dolphin.
+
+Anyway that frustration prompted me to add a second dev tool for me to use- file overwriting. 
+Now I can do it from the main menu without actual deletion, much easier. 
+
+Anyway next I need to get back to the actual work. 
+
+Today ios a bit of a slower day overall, and that's okay, so i'll likely be back 
+to work on our new endless loop either tonight or tomorrow.

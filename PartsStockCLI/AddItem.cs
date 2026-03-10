@@ -20,11 +20,13 @@ public class AddItem
                 "ItemList.json");
             if (path == null)
             {
+                Console.WriteLine("path null");
                 File.Create(path).Close();
                 
             }
             else
             {
+                Console.WriteLine("path already exists");
                 
                 
             }
@@ -38,7 +40,7 @@ public class AddItem
             appends[5] = $"Item Stock: {itemStock}";
             appends[6] = $"Item PurchaseDate: {itemPurchaseDate}";
             
-            
+            Console.WriteLine($"appends: {string.Join(", ", appends)}");
             File.AppendAllText(path, string.Join(Environment.NewLine, appends));
             
             

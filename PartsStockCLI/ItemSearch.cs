@@ -2,20 +2,23 @@ namespace PartsStockCLI;
 
 public class ItemSearch
 {
-    public void Input()
+    public void DeMenu()
     {
+        var searchReturn = new List<string>();
         string delimiter = "--------";
         Console.WriteLine("What parameter would you like to search by?");
-        Console.WriteLine("1) Item Name" + 
-                      "2) Item Number" +
-                      "3) Storage Location" +
-                      "4) Sourcing Location");
-        string userParameter =  Console.ReadLine();
+        Console.WriteLine("1) Item Name\n" +
+                          "2) Item Number\n" +
+                          "3) Storage Location\n" +
+                          "4) Sourcing Location\n");
+        string userParameter = Console.ReadLine();
         switch (userParameter)
         {
             case "1":
                 // Item  name
-                SearchByName(delimiter);
+                searchReturn.Add(SearchByName(delimiter));
+                Console.WriteLine("Results: \n");
+                Console.WriteLine(searchReturn);
                 break;
             case "2":
                 // Item number
@@ -31,20 +34,28 @@ public class ItemSearch
         }
     }
 
-    public void SearchByName(string delimiter)
-    {
-        string[] appends = new string[250]; 
+    public string SearchByName(string delimiter)
+    {   var appends = new List<string>();
+        
         Console.WriteLine("Item name to search for: ");
         string itemName = Console.ReadLine();
-        StreamReader sw = new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ItemList.json"));
+        StreamReader sw =
+            new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "ItemList.json"));
         string line = sw.ReadLine();
+        Console.WriteLine("Line check");
         while (line != null)
         {
+            Console.WriteLine("Line is not null!");
+            // This little loop gets the searched term within the file and appends every
+            // Line between the inital line where the term is found and the next delimiter to appends
             if (line.Contains(itemName))
             {
-                appends[0] = line;
+                Console.WriteLine("itemName Found!");
+                appends.Add(line);
+                
                 line = sw.ReadLine();
-                for (int i = 1; i < appends.Length; i++)
+                for (int i = 1; i < appends.Count; i++)
                 {
                     if (line != delimiter)
                     {
@@ -54,12 +65,15 @@ public class ItemSearch
                     if (line.Contains(delimiter))
                     {
                         appends[i] = line;
-                        i = appends.Length;
+                        i = appends.Count;
                     }
                 }
+
                 sw.Close();
             }
-            
+
         }
+        Console.WriteLine("Return Reached!");
+        return appends[^1];
     }
 }
