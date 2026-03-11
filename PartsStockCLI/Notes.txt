@@ -98,5 +98,35 @@ Now I can do it from the main menu without actual deletion, much easier.
 
 Anyway next I need to get back to the actual work. 
 
-Today ios a bit of a slower day overall, and that's okay, so i'll likely be back 
+Today is a bit of a slower day overall, and that's okay, so i'll likely be back 
 to work on our new endless loop either tonight or tomorrow.
+
+3/10/2026-
+
+It's kinda crazy how much of a difference coming back fresh can do; I opened the code to where
+I was yesterday and immediately realized that the loop was infinite because it only ends 
+when line contains the search term and it will always contain the delimiter at that point.
+
+A quick print statement confirmed my suspicions.
+
+I could change while to an if, or keep it while and add a stop when line == delimiter.
+
+But if only change it to if that only solves the infinite looping itself, and line
+will still container the delimiter at that point and now the search term.
+
+a quick line = sw.ReadLine advanced line to the search term and now I'm onto the next bug;
+it seems we got as far as the item found statement but hit a bug after.
+
+I think the file is closing by the time it gets the line= sw.ReadLine on line 59, but I'm not really sure why
+yet. 
+
+It was because I was closing it. Oops. 
+
+The printing the searched for entry is still a little funky but the search is successful and it does print,
+so, it's at least in better shape than it was when I started! 
+
+All the noise being printed was from my mess of debug statements so I got those commented out so 
+I can see what's actually happening a bit more clearly. We're getting all the way through the method and
+back out to the switch statement but only printing the item description from within the switch loop which off hand 
+makes me think that my method isn't appending to appends correctly. 
+

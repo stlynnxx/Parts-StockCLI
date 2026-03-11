@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace PartsStockCLI;
 
 public class ItemSearch
@@ -18,7 +20,11 @@ public class ItemSearch
                 // Item  name
                 searchReturn.Add(SearchByName(delimiter));
                 Console.WriteLine("Results: \n");
-                Console.WriteLine(searchReturn);
+                for (int i = 0; i < searchReturn.Count; i++) {
+                    Console.WriteLine("Inside Switch Loop");
+                    Console.WriteLine(searchReturn[i]);
+                }
+
                 break;
             case "2":
                 // Item number
@@ -44,33 +50,42 @@ public class ItemSearch
                 "ItemList.json"));
         string line = sw.ReadLine();
         Console.WriteLine("Line check");
-        while (line != null)
-        {
-            Console.WriteLine("Line is not null!");
+        
+        
+            line = sw.ReadLine();
+            // Console.WriteLine("Line is not null!");
+            // Console.WriteLine(line);
             // This little loop gets the searched term within the file and appends every
             // Line between the inital line where the term is found and the next delimiter to appends
-            if (line.Contains(itemName))
+            if (line != null && line.Contains(itemName))
             {
-                Console.WriteLine("itemName Found!");
-                appends.Add(line);
-                
-                line = sw.ReadLine();
-                for (int i = 1; i < appends.Count; i++)
+                while (line != null)
                 {
-                    if (line != delimiter)
-                    {
-                        appends[i] = line;
-                    }
 
-                    if (line.Contains(delimiter))
+
+                    // Console.WriteLine("itemName Found!");
+                    appends.Add(line);
+                    // Console.WriteLine($"Appends: {appends[0]}");
+                    // Console.WriteLine($"line =  {line}");
+                    line = sw.ReadLine();
+                    // Console.WriteLine($"line =  {line}");
+                    for (int i = 1; i < appends.Count; i++)
                     {
-                        appends[i] = line;
-                        i = appends.Count;
+                        if (line != delimiter)
+                        {
+                            appends[i] = line;
+                        }
+
+                        if (line.Contains(delimiter))
+                        {
+                            appends[i] = line;
+                            i = appends.Count;
+                        }
                     }
                 }
 
-                sw.Close();
-            }
+
+            
 
         }
         Console.WriteLine("Return Reached!");
