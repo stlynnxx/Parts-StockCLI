@@ -130,3 +130,11 @@ I can see what's actually happening a bit more clearly. We're getting all the wa
 back out to the switch statement but only printing the item description from within the switch loop which off hand 
 makes me think that my method isn't appending to appends correctly. 
 
+3/11/2026- 
+I'm doing some lighter work this morning; so far I've gotten the search process smoothed out a bit more 
+and now my issue is with appending to appends. I made appends a global array as well. Whenever we get out of
+the method and back to the menu switch I can print the different elements of appends manually but only appends[0]
+seems to be holding anything. 
+
+I'm sure I can figure it out! I just have divided time today.
+

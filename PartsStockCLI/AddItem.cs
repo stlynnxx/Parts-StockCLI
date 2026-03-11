@@ -32,13 +32,14 @@ public class AddItem
             }
 
             string[] appends = new string[25];
-            appends[0] = "--------";
-            appends[1] = $"Item Name: {itemName}";
-            appends[2] = $"Item Description:  {itemDescription}";
-            appends[3] = $"Item Price: {itemPrice}"; 
-            appends[4] = $"Item Quantity: {itemQuantity}";
-            appends[5] = $"Item Stock: {itemStock}";
-            appends[6] = $"Item PurchaseDate: {itemPurchaseDate}";
+            
+            appends[0] = $"Item Name: {itemName}";
+            appends[1] = $"Item Description:  {itemDescription}";
+            appends[2] = $"Item Price: {itemPrice}"; 
+            appends[3] = $"Item Quantity: {itemQuantity}";
+            appends[4] = $"Item Stock: {itemStock}";
+            appends[5] = $"Item PurchaseDate: {itemPurchaseDate}";
+            appends[6] = "--------";
             
             Console.WriteLine($"appends: {string.Join(", ", appends)}");
             File.AppendAllText(path, string.Join(Environment.NewLine, appends));

@@ -81,7 +81,7 @@ namespace PartsStockCLI
                         break;
                     case 2:
                         Console.WriteLine("You chose two");
-                        search.DeMenu();
+                        search.Menu();
                         break;
                     case 3:
                         sourcing.Main();
