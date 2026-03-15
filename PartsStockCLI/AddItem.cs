@@ -9,7 +9,7 @@ public class AddItem
 {
     public void NewItem()
     {
-        
+        Console.Clear();
         /* caller() collects the input for the new item fields and
          assigns them, appender appends them*/
         caller();

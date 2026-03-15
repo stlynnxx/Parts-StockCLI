@@ -7,6 +7,7 @@ public class ItemSearch
     List<string> appends = new List<string>();
     public void Menu()
     {
+        Console.Clear();
         var searchReturn = new List<string>();
         string delimiter = "--------";
         Console.WriteLine("What parameter would you like to search by?");

@@ -10,7 +10,7 @@ namespace PartsStockCLI
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             Route r = new Route();
             Display display = new Display();
@@ -80,7 +80,6 @@ namespace PartsStockCLI
                         add.NewItem();
                         break;
                     case 2:
-                        Console.WriteLine("You chose two");
                         search.Menu();
                         break;
                     case 3:
@@ -101,8 +100,10 @@ namespace PartsStockCLI
                          
                             Console.WriteLine("Filename to be overwritten");
                             string userInput = Console.ReadLine();
-                            string path = Pather("ItemList.json");
-                            File.WriteAllText(path, "         ");
+                            string path = Pather(userInput);
+                            File.WriteAllText(path, "\0\0\0\0\0\0");
+                            Console.WriteLine("File overwritten");
+                            Main();
                             break;
                                     
                             default:

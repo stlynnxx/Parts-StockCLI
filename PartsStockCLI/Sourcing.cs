@@ -7,6 +7,7 @@ public class Sourcing
 {
     public void Main()
     {
+        Console.Clear();
         string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
             "Sourcing.json");
         string dashes = "--------";
@@ -15,12 +16,10 @@ public class Sourcing
         switch (userInput)
         {
             case "1":
-                Console.WriteLine("You chose one");
                 AddSourcingLocation(dashes, path);
                 break;
             case "2":
                 LoadSourcingLocation(LoadInterface(), path, path );
-                Console.WriteLine("You chose two");
                 break;
             case "3":
                 Console.WriteLine("You chose three");
@@ -29,13 +28,14 @@ public class Sourcing
                 Console.WriteLine("You chose four");
                 break;
             case "5":
-                Environment.Exit(0);
+                Program.Main();
                 break;
             default:
-                Console.WriteLine("You chose three");
+                Environment.Exit(0);
                 break;
             
         }
+        Program.Main();
     }
 
     public void Menu(string dashes)
@@ -43,41 +43,41 @@ public class Sourcing
         Console.WriteLine(dashes);
         Console.WriteLine("-Sourcing Menu-");
         Console.WriteLine("1) Add Sourcing Location");
-        Console.WriteLine("2) Edit Sourcing Location");
+        Console.WriteLine("2) Load Sourcing Location");
         Console.WriteLine("3) Delete Sourcing Location");
         Console.WriteLine("4) Review Sourcing Locations");
-        Console.WriteLine("5) Exit");
+        Console.WriteLine("5) Home");
+        Console.WriteLine("6) Exit Program");
         Console.WriteLine(dashes);
     }
 
     void AddSourcingLocation(string dashes, string path)
     {
-        string[] appends = new string[500];
+        SourcingLocation location = new SourcingLocation();
+        string[] append = new string[10];
+        append[0] = dashes;
+        Console.Clear();
         Console.WriteLine("Location Name: ");
-        string locationName = Console.ReadLine();
+        location.LocationName = Console.ReadLine();
+        append[1] = $"Location Name: {location.LocationName}";
         Console.WriteLine("Location Address: ");
-        string locationAddress = Console.ReadLine();
+        location.LocationAddress = Console.ReadLine(); 
+        append[2] = $"Location Address: {location.LocationAddress}";
         Console.WriteLine("Location City: ");
-        string locationCity = Console.ReadLine();
+        location.LocationCity = Console.ReadLine();
+        append[3] = $"Location City: {location.LocationCity}";
         Console.WriteLine("Location State: ");
-        string locationState = Console.ReadLine();
+        location.LocationState = Console.ReadLine();
+        append[4] = $"Location State: {location.LocationState}";
         Console.WriteLine("Location Country: ");
-        string locationCountry = Console.ReadLine();
+        location.LocationCountry = Console.ReadLine();
+        append[5] = $"Location Country: {location.LocationCountry}";
         
         if (!File.Exists(path))
         {
             File.Create(path).Close();
         }
-
-        appends[0] = dashes;
-        appends[1] = $"Location Name: {locationName}";
-        appends[2] = $"Location Address: {locationAddress}";
-        appends[3] = $"Location City: {locationCity}";
-        appends[4] = $"Location State: {locationState}";
-        appends[5] = $"Location Country: {locationCountry}";
-        appends[6] = dashes;
-        File.AppendAllLines(path, appends);
-
+        File.AppendAllLines(path, append);
     }
 
     string LoadInterface()
@@ -99,6 +99,10 @@ public class Sourcing
             // From here we need to get what we're searching for specifically 
             // from the loaded file
             Console.WriteLine(loadedFile);
+        }
+        else
+        {
+            Console.WriteLine("Search failed");
         }
     } 
     

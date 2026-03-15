@@ -138,3 +138,15 @@ seems to be holding anything.
 
 I'm sure I can figure it out! I just have divided time today.
 
+
+3/14/2026-
+
+Just some lighter work tonight really since I'm kinda sleepy and I didn't code at all yesterday.
+
+I cleaned up the new sourcing location process and got rid of some unnecessary code. I also fixed the 
+file overwrite tool, and made some in general flow improvements. 
+
+The sourcing location search is up and running but currently returns the entire file and not only the entry
+that matches the search parameter. I'll just probably save that for tomorrow since my eyes are heavy. 
+
+
