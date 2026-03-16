@@ -149,4 +149,13 @@ file overwrite tool, and made some in general flow improvements.
 The sourcing location search is up and running but currently returns the entire file and not only the entry
 that matches the search parameter. I'll just probably save that for tomorrow since my eyes are heavy. 
 
+3/16/2026-
+
+Back again! I needed yesterday to rest so I could come back strong. 
+
+This morning I messed around in AddItem and started to hardcode the file appending into json when 
+I realized I could just use System.Text.Json and now I'm switching things over to that so that I can
+have actual proper json files and not just text labeled as json.
+
+One thing at a time. 
 

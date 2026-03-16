@@ -1,7 +1,4 @@
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
-using System.Xml;
+using System.Text.Json;
 
 namespace PartsStockCLI;
 
@@ -31,20 +28,24 @@ public class AddItem
                 
             }
 
-            string[] appends = new string[25];
+            List<string> appends = new List<string>();
             
-            appends[0] = $"Item Name: {itemName}";
-            appends[1] = $"Item Description:  {itemDescription}";
-            appends[2] = $"Item Price: {itemPrice}"; 
-            appends[3] = $"Item Quantity: {itemQuantity}";
-            appends[4] = $"Item Stock: {itemStock}";
-            appends[5] = $"Item PurchaseDate: {itemPurchaseDate}";
-            appends[6] = "--------";
+            appends.Add("{Items: {");
+            appends.Add($"Item Name: {itemName}");
+            appends.Add($"Item Description:  {itemDescription}");
+            appends.Add($"Item Price: {itemPrice}"); 
+            appends.Add("Item Quantity: {itemQuantity}");
+            appends.Add($"Item Stock: {itemStock}");
+            appends.Add($"Item PurchaseDate: {itemPurchaseDate}");
+            appends.Add("--------");
+            appends.Add("}}");
             
-            Console.WriteLine($"appends: {string.Join(", ", appends)}");
-            File.AppendAllText(path, string.Join(Environment.NewLine, appends));
             
             
+            string jsonAppends = JsonSerializer.Serialize(appends);
+            File.AppendAllText(path, string.Join(Environment.NewLine, jsonAppends));
+            
+
         }
 
 
