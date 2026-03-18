@@ -166,3 +166,6 @@ From here I can go about perfecting the fields we're using for the item list, an
 out the other features I already have started; all the other files that are read/writtten from will
 also need to be set up with proper json and there's always work to do with searches. But it's
 (slowly) coming along!
+
+I also added item numbers and the tracking logic for them!
+

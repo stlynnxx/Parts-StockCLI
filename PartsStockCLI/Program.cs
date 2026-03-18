@@ -93,7 +93,11 @@ namespace PartsStockCLI
                         break;
                     
                         case 6:
-                            File.Delete("Items.json");
+                            Console.WriteLine("File to be deleted: ");
+                            string fileName = Console.ReadLine();
+                            File.Delete(fileName);
+                            Console.WriteLine("File deleted");
+                            Main();
                             break;
                         
                            case 7:
@@ -101,7 +105,7 @@ namespace PartsStockCLI
                             Console.WriteLine("Filename to be overwritten");
                             string userInput = Console.ReadLine();
                             string path = Pather(userInput);
-                            File.WriteAllText(path, "\0\0\0\0\0\0");
+                            File.WriteAllText(path, "[]");
                             Console.WriteLine("File overwritten");
                             Main();
                             break;

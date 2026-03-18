@@ -14,12 +14,15 @@ public class AddItem
 
         void appender(Item item)
         {
+            bool isNewFile = false;
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "ItemList.json");
-            if (path == null)
+            if (!File.Exists(path))
             {
                 Console.WriteLine("path null");
-                File.Create(path);
+                File.Create(path).Close();
+                File.WriteAllText(path, "[]");
+                isNewFile = true;
                 // File.AppendAllText(path, JsonSerializer.Serialize("{ Items: {"));
                 
 
@@ -27,15 +30,26 @@ public class AddItem
             else
             {
                 Console.WriteLine("path already exists");
-               
+            }
+
+            if (isNewFile == true)
+            {
+                item.ItemNumber = 1;
+            }
+
+            if (isNewFile == false)
+            {
                 
-                
+                using JsonDocument doc = JsonDocument.Parse(File.ReadAllText(path));
+                int count = doc.RootElement.GetArrayLength();
+                item.ItemNumber = count + 1;
             }
 
             List<string> appends = new List<string>();
             
             
-            appends.Add($"[ Item Name: {item.ItemName}");
+            appends.Add($"[Item Name: {item.ItemName}");
+            appends.Add($"Item Number: {item.ItemNumber}");
             appends.Add($"Item Description:  {item.ItemDescription}");
             appends.Add($"Item Price: {item.ItemPrice}"); 
             appends.Add($"Item Quantity: {item.ItemQuantity}");
@@ -46,7 +60,9 @@ public class AddItem
 
 
             var options = new JsonSerializerOptions { WriteIndented = true };
-            File.AppendAllText(path, JsonSerializer.Serialize(item, options));
+            List<Item> items = JsonSerializer.Deserialize<List<Item>>(File.ReadAllText(path));
+            items.Add(item);
+            File.WriteAllText(path, JsonSerializer.Serialize(items, options));
             
 
         }
@@ -82,6 +98,7 @@ public class AddItem
     class Item
     {
         private string itemName;
+        private int itemNumber;
         private string itemDescription;
         private string itemPrice;
         private int itemQuantity;
@@ -93,6 +110,12 @@ public class AddItem
         {
             get { return itemName; }
             set { itemName = value; }
+        }
+
+        public int ItemNumber
+        {
+            get { return itemNumber; }
+            set { itemNumber = value; }
         }
 
         public string ItemDescription
