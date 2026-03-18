@@ -9,64 +9,67 @@ public class AddItem
         Console.Clear();
         /* caller() collects the input for the new item fields and
          assigns them, appender appends them*/
-        caller();
+        Item newItem = new Item();
+        caller(newItem);
 
-        void appender()
+        void appender(Item item)
         {
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "ItemList.json");
             if (path == null)
             {
                 Console.WriteLine("path null");
-                File.Create(path).Close();
+                File.Create(path);
+                // File.AppendAllText(path, JsonSerializer.Serialize("{ Items: {"));
                 
+
             }
             else
             {
                 Console.WriteLine("path already exists");
+               
                 
                 
             }
 
             List<string> appends = new List<string>();
             
-            appends.Add("{Items: {");
-            appends.Add($"Item Name: {itemName}");
-            appends.Add($"Item Description:  {itemDescription}");
-            appends.Add($"Item Price: {itemPrice}"); 
-            appends.Add("Item Quantity: {itemQuantity}");
-            appends.Add($"Item Stock: {itemStock}");
-            appends.Add($"Item PurchaseDate: {itemPurchaseDate}");
-            appends.Add("--------");
-            appends.Add("}}");
             
-            
-            
-            string jsonAppends = JsonSerializer.Serialize(appends);
-            File.AppendAllText(path, string.Join(Environment.NewLine, jsonAppends));
+            appends.Add($"[ Item Name: {item.ItemName}");
+            appends.Add($"Item Description:  {item.ItemDescription}");
+            appends.Add($"Item Price: {item.ItemPrice}"); 
+            appends.Add($"Item Quantity: {item.ItemQuantity}");
+            appends.Add($"Item Stock: {item.ItemStock}");
+            appends.Add($"Item PurchaseDate: {item.ItemPurchaseDate}");
+            appends.Add("]\\n");
+
+
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            File.AppendAllText(path, JsonSerializer.Serialize(item, options));
             
 
         }
 
 
-        void caller()
+        void caller(Item item)
         {
             Console.WriteLine("--------");
             Console.WriteLine("Item Name: ");
-            ItemName = Console.ReadLine();
+            item.ItemName = Console.ReadLine();
             Console.WriteLine("Item Description: ");
-            ItemDescription = Console.ReadLine();
+            item.ItemDescription = Console.ReadLine();
             Console.WriteLine("Item Price: NUMS ONLY ");
-            ItemPrice = Console.ReadLine();
+            item.ItemPrice = Console.ReadLine();
             Console.WriteLine("Item Quantity: NUMS ONLY ");
-            ItemQuantity = int.Parse(Console.ReadLine());
+            item.ItemQuantity = int.Parse(Console.ReadLine());
             Console.WriteLine("Item Stock: NUMS ONLY ");
-            ItemStock = int.Parse(Console.ReadLine());
+            item.ItemStock = int.Parse(Console.ReadLine());
             Console.WriteLine("Item PurchaseDate: ");
-            ItemPurchaseDate = Console.ReadLine();
+            item.ItemPurchaseDate = Console.ReadLine();
             
             Console.WriteLine("--------");
-            appender();
+            appender(item);
         }
     }
 
@@ -76,16 +79,17 @@ public class AddItem
 
 
 
-
-    private string itemName;
+    class Item
+    {
+        private string itemName;
         private string itemDescription;
         private string itemPrice;
         private int itemQuantity;
         private int itemStock;
         private string itemPurchaseDate;
-        
-        
-        public string ItemName 
+
+
+        public string ItemName
         {
             get { return itemName; }
             set { itemName = value; }
@@ -96,31 +100,35 @@ public class AddItem
             get { return itemDescription; }
             set { itemDescription = value; }
         }
+
         public string ItemPrice
         {
             get { return itemPrice; }
             set { itemPrice = value; }
         }
+
         public int ItemQuantity
         {
             get { return itemQuantity; }
             set { itemQuantity = value; }
         }
+
         public int ItemStock
         {
             get { return itemStock; }
             set { itemStock = value; }
         }
+
         public string ItemPurchaseDate
         {
             get { return itemPurchaseDate; }
             set { itemPurchaseDate = value; }
         }
-       
-        
-        
-
-
-
-
     }
+
+
+
+
+
+
+}
