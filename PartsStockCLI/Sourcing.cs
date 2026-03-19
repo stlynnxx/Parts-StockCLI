@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace PartsStockCLI;
 
@@ -10,13 +11,14 @@ public class Sourcing
         Console.Clear();
         string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
             "Sourcing.json");
+        SourcingLocation sourcingLocation = new SourcingLocation();
         string dashes = "--------";
         Menu(dashes);
         string userInput = Console.ReadLine();
         switch (userInput)
         {
             case "1":
-                AddSourcingLocation(dashes, path);
+                AddSourcingLocation(dashes, path, sourcingLocation);
                 break;
             case "2":
                 LoadSourcingLocation(LoadInterface(), path, path );
@@ -35,6 +37,7 @@ public class Sourcing
                 break;
             
         }
+        Console.Clear();
         Program.Main();
     }
 
@@ -51,33 +54,42 @@ public class Sourcing
         Console.WriteLine(dashes);
     }
 
-    void AddSourcingLocation(string dashes, string path)
+    void AddSourcingLocation(string dashes, string path, SourcingLocation sourcingLocation)
     {
-        SourcingLocation location = new SourcingLocation();
-        string[] append = new string[10];
-        append[0] = dashes;
+        
         Console.Clear();
         Console.WriteLine("Location Name: ");
-        location.LocationName = Console.ReadLine();
-        append[1] = $"Location Name: {location.LocationName}";
+        sourcingLocation.LocationName = Console.ReadLine();
+        
         Console.WriteLine("Location Address: ");
-        location.LocationAddress = Console.ReadLine(); 
-        append[2] = $"Location Address: {location.LocationAddress}";
+        sourcingLocation.LocationAddress = Console.ReadLine(); 
+        
         Console.WriteLine("Location City: ");
-        location.LocationCity = Console.ReadLine();
-        append[3] = $"Location City: {location.LocationCity}";
+        sourcingLocation.LocationCity = Console.ReadLine();
+        
         Console.WriteLine("Location State: ");
-        location.LocationState = Console.ReadLine();
-        append[4] = $"Location State: {location.LocationState}";
+        sourcingLocation.LocationState = Console.ReadLine();
+        
         Console.WriteLine("Location Country: ");
-        location.LocationCountry = Console.ReadLine();
-        append[5] = $"Location Country: {location.LocationCountry}";
+        sourcingLocation.LocationCountry = Console.ReadLine();
+        
         
         if (!File.Exists(path))
         {
+            Console.WriteLine("path null");
             File.Create(path).Close();
+            File.WriteAllText(path, "[]");
         }
-        File.AppendAllLines(path, append);
+        else
+        {
+        }
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        List<SourcingLocation> loc = JsonSerializer.Deserialize<List<SourcingLocation>>(File.ReadAllText(path));
+        loc.Add(sourcingLocation);
+        File.WriteAllText(path, JsonSerializer.Serialize(loc, options));
+
+        
+
     }
 
     string LoadInterface()
@@ -90,7 +102,7 @@ public class Sourcing
 
     void LoadSourcingLocation(string searchParmeter, string dashes, string path)
     {
-        
+        List<Sourcing> loc = JsonSerializer.Deserialize<List<Sourcing>>(File.ReadAllText(path));
         
         string loadedFile = File.ReadAllText(path);
         if (loadedFile.Contains(searchParmeter))

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-
-namespace PartsStockCLI
+﻿namespace PartsStockCLI
 {
     class Program
     {

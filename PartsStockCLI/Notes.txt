@@ -169,3 +169,16 @@ also need to be set up with proper json and there's always work to do with searc
 
 I also added item numbers and the tracking logic for them!
 
+I'm up later than expected doing some more work in here. I set up the 
+sourcing location and storage location pages with the clean json logic 
+and next we can start on search implementations. I just thought I'd smooth that
+all out a bit more while I was in the mood to.
+
+I need to think about my fields for the Storage Locations a bit; the ones I have 
+now are basically placeholders and not entirely helpful. Considering storage locations
+will mostly be internal for smaller time outfits asking the country isn't really needed.
+
+Maybe I should consider making the Storage Location class a bit more in depth;
+Maybe it should be something like Overall location- Room - Shelf - Unit, or something
+similar. 
+
