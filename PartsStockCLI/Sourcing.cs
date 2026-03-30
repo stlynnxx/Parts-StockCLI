@@ -1,5 +1,4 @@
-using System.ComponentModel;
-using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text.Json;
 
 namespace PartsStockCLI;
@@ -8,37 +7,47 @@ public class Sourcing
 {
     public void Main()
     {
-        Console.Clear();
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "Sourcing.json");
-        SourcingLocation sourcingLocation = new SourcingLocation();
-        string dashes = "--------";
-        Menu(dashes);
-        string userInput = Console.ReadLine();
-        switch (userInput)
+        try
         {
-            case "1":
-                AddSourcingLocation(dashes, path, sourcingLocation);
-                break;
-            case "2":
-                LoadSourcingLocation(LoadInterface(), path, path );
-                break;
-            case "3":
-                Console.WriteLine("You chose three");
-                break;
-            case "4":
-                Console.WriteLine("You chose four");
-                break;
-            case "5":
-                Program.Main();
-                break;
-            default:
-                Environment.Exit(0);
-                break;
+            Console.Clear();
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "Sourcing.json");
+            SourcingLocation sourcingLocation = new SourcingLocation();
+            string dashes = "--------";
+            Menu(dashes);
+            string userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    AddSourcingLocation(dashes, path, sourcingLocation);
+                    break;
+                case "2":
+                    LoadSourcingLocation(LoadInterface(), path, path );
+                    break;
+                case "3":
+                    Console.WriteLine("You chose three");
+                    break;
+                case "4":
+                    Console.WriteLine("You chose four");
+                    break;
+                case "5":
+                    Program.Main();
+                    break;
+                default:
+                    Environment.Exit(0);
+                    break;
             
+            }
+            Console.Clear();
+            Program.Main();
+
         }
-        Console.Clear();
-        Program.Main();
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 
     public void Menu(string dashes)
@@ -56,38 +65,41 @@ public class Sourcing
 
     void AddSourcingLocation(string dashes, string path, SourcingLocation sourcingLocation)
     {
-        
-        Console.Clear();
-        Console.WriteLine("Location Name: ");
-        sourcingLocation.LocationName = Console.ReadLine();
-        
-        Console.WriteLine("Location Address: ");
-        sourcingLocation.LocationAddress = Console.ReadLine(); 
-        
-        Console.WriteLine("Location City: ");
-        sourcingLocation.LocationCity = Console.ReadLine();
-        
-        Console.WriteLine("Location State: ");
-        sourcingLocation.LocationState = Console.ReadLine();
-        
-        Console.WriteLine("Location Country: ");
-        sourcingLocation.LocationCountry = Console.ReadLine();
-        
-        
-        if (!File.Exists(path))
+        try
         {
-            Console.WriteLine("path null");
-            File.Create(path).Close();
-            File.WriteAllText(path, "[]");
-        }
-        else
-        {
-        }
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        List<SourcingLocation> loc = JsonSerializer.Deserialize<List<SourcingLocation>>(File.ReadAllText(path));
-        loc.Add(sourcingLocation);
-        File.WriteAllText(path, JsonSerializer.Serialize(loc, options));
+            Console.Clear();
+        
+            Console.WriteLine("Location Name: ");
+            sourcingLocation.LocationName = Console.ReadLine();
+        
+            Console.WriteLine("Location Address: ");
+            sourcingLocation.LocationAddress = Console.ReadLine(); 
+        
+            Console.WriteLine("Location Type: ");
+            sourcingLocation.LocationCity = Console.ReadLine();
+        
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("path null");
+                File.Create(path).Close();
+                File.WriteAllText(path, "[]");
+            }
+           
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            List<SourcingLocation> loc = JsonSerializer.Deserialize<List<SourcingLocation>>(File.ReadAllText(path));
+            loc.Add(sourcingLocation);
+            File.WriteAllText(path, JsonSerializer.Serialize(loc, options));
 
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+        
+        
         
 
     }
@@ -100,22 +112,33 @@ public class Sourcing
 
     }
 
-    void LoadSourcingLocation(string searchParmeter, string dashes, string path)
+    void LoadSourcingLocation(string searchParameter, string dashes, string path)
     {
-        List<Sourcing> loc = JsonSerializer.Deserialize<List<Sourcing>>(File.ReadAllText(path));
+        // From here we need to get what we're searching for specifically 
+        // from the loaded file
+        try
+        {
+            string jsonContent = File.ReadAllText(path);
+            JsonDocument doc = JsonDocument.Parse(jsonContent);
+            foreach (JsonElement element in doc.RootElement.EnumerateArray())
+            {
+                if (element.TryGetProperty(searchParameter, out JsonElement prop))
+                {
+                    if (prop.GetString() == searchParameter)
+                    {
+                        Console.WriteLine(element.ToString());
+                    }
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
         
-        string loadedFile = File.ReadAllText(path);
-        if (loadedFile.Contains(searchParmeter))
-        {
-            Console.WriteLine("Search successful");
-            // From here we need to get what we're searching for specifically 
-            // from the loaded file
-            Console.WriteLine(loadedFile);
-        }
-        else
-        {
-            Console.WriteLine("Search failed");
-        }
+        
     } 
     
 
@@ -125,34 +148,29 @@ public class Sourcing
         private string locationAddress;
         private string locationCity;
         private string locationState;
-        private string locationCountry;
+        
+
         
         public string LocationName
         {
             get {  return locationName; }
             set {  locationName = value; }
         }
-
         public string LocationAddress
         {
             get {  return locationAddress; }
             set {  locationAddress = value; }
         }
-
         public string LocationCity
         {
             get {  return locationCity; }
             set {  locationCity = value; }
         }
+
         public string LocationState
         {
             get {  return locationState; }
             set {  locationState = value; }
-        }
-        public string LocationCountry
-        {
-            get {  return locationCountry; }
-            set {  locationCountry = value; }
         }
         
     }

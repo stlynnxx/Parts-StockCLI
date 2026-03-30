@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Xml;
 
 namespace PartsStockCLI;
 
@@ -9,11 +8,11 @@ public class StorageLocations
     {
         string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
             "StorageLocations.json");
-        StorageLocation location = new StorageLocation();
+        
         
         // string borderDashes = "--------";
         
-        StorageMenu(path, location);
+        StorageMenu(path);
         
         // If a user wants to load a location, this menu is called for the load parameter
         void LoadLocationMenu(string path)
@@ -90,42 +89,65 @@ public class StorageLocations
         }
 
         // This is for creating a new storage location
-        void createLocation(string path, StorageLocation location)
+        void createLocation(string path)
         {
+            int subCount = 0;
+            bool sublocations = false;
+            Console.WriteLine("Does this location have any sublocations? (y/N)");
+            string userInput = Console.ReadLine();
+            if (userInput == "y")
+            {
+                Console.WriteLine("Sublocation count: (nums only)");
+                subCount = int.Parse(Console.ReadLine());
+                sublocations = true;
+            }
             
-            
+            int idIdx = 1;
+            int? parentID = null;
+            StorageLocation storageLocation = new StorageLocation();
+            storageLocation.Id = idIdx;
             
             Console.WriteLine("Location Name:");
-            location.LocationName = Console.ReadLine();
+            storageLocation.LocationName = Console.ReadLine();
             Console.WriteLine("Details: ");
-            location.Details = Console.ReadLine();
+            storageLocation.Details = Console.ReadLine();
             Console.WriteLine("Location City:");
-            location.LocationCity = Console.ReadLine();
-            Console.WriteLine("Location State:");
-            location.LocationState = Console.ReadLine();
-            Console.WriteLine("Location Country:");
-            location.LocationCountry = Console.ReadLine();
-           
+            storageLocation.LocationCity = Console.ReadLine();
+            Console.WriteLine("Location Type:");
+            storageLocation.LocationType = Console.ReadLine();
             
+            storageLocation.ParentId = parentID;
+            if (sublocations == true)
+            {
+                
+                for (int i = 0; i <= subCount; i++)
+                {
+                    StorageLocation subLocation = new StorageLocation(); 
+                    subLocation.Id = idIdx + 1;
+                    Console.WriteLine("Sub Location Name: ");
+                    subLocation.LocationName = Console.ReadLine();
+                    subLocation.ParentId = 1;
+                    subLocation.Parent = storageLocation;
+                }
+            }
+
             if (!File.Exists(path))
             {
                 Console.WriteLine("path null");
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
             }
-            else
-            {
-            }
+           
             
             
             var options = new JsonSerializerOptions { WriteIndented = true };
             List<StorageLocation> loc = JsonSerializer.Deserialize<List<StorageLocation>>(File.ReadAllText(path));
-            loc.Add(location);
+            loc.Add(storageLocation);
             File.WriteAllText(path, JsonSerializer.Serialize(loc, options));    
         }
 
         // This is where the user decides what they want to do 
-        void StorageMenu(string path, StorageLocation location)
+        void StorageMenu(string path)
         {
             
             string storageMenu = "1)Load Storage Location\n" +
@@ -145,7 +167,7 @@ public class StorageLocations
                         Console.WriteLine("You chose 2");
                     break;
                     case "3":
-                        createLocation(path, location);
+                        createLocation(path);
                         break;
                     default:
                         Console.WriteLine("Invalid Input");
@@ -157,13 +179,20 @@ public class StorageLocations
 
 }
 
-    public class StorageLocation()
+    public class StorageLocation
     {
+       
+       
         private string locationName;
         private string details;
         private string locationCity;
         private string locationState;
         private string locationCountry;
+        private string locationType;
+        private int id;
+       
+        public StorageLocation Parent { get; set; }
+        public List<StorageLocation> Children { get; set; }
 
         public string LocationName {
             get { return this.locationName; }
@@ -180,15 +209,25 @@ public class StorageLocations
             get { return this.locationCity; }
             set { this.locationCity = value; }
         }
-        public string LocationState {
+
+        public string LocationType
+        {
             get { return this.locationState; }
             set { this.locationState = value; }
         }
-        public string LocationCountry {
-            get { return this.locationCountry; }
-            set { this.locationCountry = value; }
-        }
         
+
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
+
+        public int? ParentId
+        {
+            get { return this.ParentId; }
+            set {  this.ParentId = value; }
+        }
     }
 
 }

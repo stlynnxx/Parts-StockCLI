@@ -182,3 +182,11 @@ Maybe I should consider making the Storage Location class a bit more in depth;
 Maybe it should be something like Overall location- Room - Shelf - Unit, or something
 similar. 
 
+3/30/2026-
+
+I took a little break from this project to spend some time on Slippery Penguin, but now I'm back! 
+
+I'm messing around with refining and error proofing both the sourcing locations and the storage locations;
+I also introduced some logic for creating and populating multiple sublocations wihin a location. I also cleaned up
+the properties a bit for storage locations; we were collecting ones not really needed. I also added a property for 
+location type. 
