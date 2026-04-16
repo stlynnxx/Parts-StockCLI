@@ -90,11 +90,6 @@ public class AddItem
     }
 
 
-
-
-
-
-
     class Item
     {
         private string itemName;
@@ -104,6 +99,7 @@ public class AddItem
         private int itemQuantity;
         private int itemStock;
         private string itemPurchaseDate;
+        private StorageLocations storageLocation;
 
 
         public string ItemName
@@ -147,6 +143,13 @@ public class AddItem
             get { return itemPurchaseDate; }
             set { itemPurchaseDate = value; }
         }
+
+        public StorageLocations StorageLocation
+        {
+            get { return storageLocation; }
+            set { storageLocation = value; }
+        }
+        
     }
 
 

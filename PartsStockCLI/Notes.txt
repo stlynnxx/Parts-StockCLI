@@ -190,3 +190,15 @@ I'm messing around with refining and error proofing both the sourcing locations 
 I also introduced some logic for creating and populating multiple sublocations wihin a location. I also cleaned up
 the properties a bit for storage locations; we were collecting ones not really needed. I also added a property for 
 location type. 
+
+4/16/2026-
+
+After some (more) time away, I've come back and done some debuggin and gotten the load
+sourcing location function seemingly working. I know it's been awhile since I've been 
+in here but I'm here now and that's good progress! 
+
+For the next session I should just start off basically as I did today; going over everything 
+that is currently implemented, polishing a bit, and making note of things I should add.
+
+It seems to not be prompting for the location state whenever we add a new
+sourcing location; we need to either implement it or not!

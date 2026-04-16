@@ -22,7 +22,8 @@ public class Sourcing
                     AddSourcingLocation(dashes, path, sourcingLocation);
                     break;
                 case "2":
-                    LoadSourcingLocation(LoadInterface(), path, path );
+                    Console.WriteLine("Case 2!");
+                    LoadSourcingLocation(dashes, path );
                     break;
                 case "3":
                     Console.WriteLine("You chose three");
@@ -38,7 +39,7 @@ public class Sourcing
                     break;
             
             }
-            Console.Clear();
+            // Console.Clear();
             Program.Main();
 
         }
@@ -104,41 +105,46 @@ public class Sourcing
 
     }
 
-    string LoadInterface()
-    {
-        Console.WriteLine("Which location would you like to load?");
-        string userIn = Console.ReadLine();
-        return userIn;
 
-    }
 
-    void LoadSourcingLocation(string searchParameter, string dashes, string path)
+    void LoadSourcingLocation(string dashes, string path)
     {
+        Console.WriteLine("Enter the Sourcing Location: ");
+        string searchParameter = Console.ReadLine();
         // From here we need to get what we're searching for specifically 
         // from the loaded file
-        try
-        {
+        
+        
+            Console.WriteLine("Trying!");
             string jsonContent = File.ReadAllText(path);
-            JsonDocument doc = JsonDocument.Parse(jsonContent);
-            foreach (JsonElement element in doc.RootElement.EnumerateArray())
+            if (string.IsNullOrWhiteSpace(jsonContent))
             {
-                if (element.TryGetProperty(searchParameter, out JsonElement prop))
+                Console.WriteLine("jsoncontent null");
+            }
+            else
+            {
+                
+                JsonDocument doc = JsonDocument.Parse(jsonContent);
+                foreach (JsonElement element in doc.RootElement.EnumerateArray())
                 {
-                    if (prop.GetString() == searchParameter)
+                    if (element.TryGetProperty("LocationName", out JsonElement value))
                     {
-                        Console.WriteLine(element.ToString());
+                        string location = value.GetString();
+                        if (location == searchParameter)
+                        {
+                            foreach (JsonProperty prop in element.EnumerateObject())
+                            {
+                                Console.WriteLine($"{prop.Name}: {prop.Value}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Property 'SourcingLocation' not found.");
                     }
                 }
             }
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-        
-        
+            
     } 
     
 
