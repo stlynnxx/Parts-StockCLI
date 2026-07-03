@@ -54,6 +54,16 @@ public class ItemSearch
         }
     }
 
+    public void SearchByNumber(string delimiter)
+    {
+        Console.WriteLine("Enter item number: ");
+        int itemNum = Convert.ToInt32(Console.ReadLine());
+        StreamReader sw =
+            new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "ItemList.json"));
+        string line = sw.ReadLine();
+    }
+
     public void SearchByName(string delimiter)
     {   
         

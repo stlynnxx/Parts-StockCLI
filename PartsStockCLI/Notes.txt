@@ -202,3 +202,40 @@ that is currently implemented, polishing a bit, and making note of things I shou
 
 It seems to not be prompting for the location state whenever we add a new
 sourcing location; we need to either implement it or not!
+
+
+4/21/2026-
+
+I admit that I'm less inspired by this project than I am by others and so I tend
+to put more time into them but I have a use for this and I'm trying to use that as 
+motivation. Anywho.
+
+It seems I should pick back up on storage locations!
+
+7/2/2026-
+
+With the busyness of my personal life since my last entry here, I've let this project fall to the wayside.
+I think I'd like to try and work it back into my routine and see where I can go with it from here. 
+
+In order to dip my toe into coming back, for now I'm running through the program and finding bugs/things to add.
+
+- After adding a new item, the program should go back to the main menu instead of ending. (Done)
+- Search by item name returns extremely messy results and then ends the program. It too should loop back to the main menu.
+- Search by Storage Location immediately ends the program. Looking at the ItemList.json file, Storage Location is being saved as a null entry. 
+- Search by Item Number immediately ends the program. 
+- Creating a new storage location ends in a stack overflow.
+- Review Sourcing Locations is not functional.
+
+These are good places for me to start from!
+
+I fixed the first issue and it led me to wanting to leave myself a note for another change; there is no need to print
+the ASCII art every time that Program.Main(); is called. 
+
+I made Program.rBool to address the ASCII art printing. Now I just need to ensure I set Program.rBool to true before I 
+call Program.Main() in order to loop back to the main menu.
+
+I've also started padding out a search by item number method because I can't just work in order, that's really asking
+for too much from me. I had intended to base it on the search by name feature as much as possible, and am now realizing 
+that I need to go back over that feature a bit and make sense of my code. So, that's where I'm at now, at least 
+after I take my dog outside, that is. 
+

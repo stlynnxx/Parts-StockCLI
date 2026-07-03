@@ -2,12 +2,20 @@
 {
     class Program
     {
+        public static bool rBool = false;
         public static void Main()
         {
-            Route r = new Route();
-            Display display = new Display();
-            Display.Art();
-            r.Routed();
+            
+            if (rBool == true)
+            {
+                Display display = new Display();
+                Display.Art();
+            }
+            else
+            {
+                Route r = new Route();
+                r.Routed();
+            }
 
         }
 

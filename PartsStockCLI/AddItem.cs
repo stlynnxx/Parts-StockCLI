@@ -29,7 +29,7 @@ public class AddItem
             }
             else
             {
-                Console.WriteLine("path already exists");
+               // Console.WriteLine("path already exists");
             }
 
             if (isNewFile == true)
@@ -63,6 +63,9 @@ public class AddItem
             List<Item> items = JsonSerializer.Deserialize<List<Item>>(File.ReadAllText(path));
             items.Add(item);
             File.WriteAllText(path, JsonSerializer.Serialize(items, options));
+            Console.WriteLine("Item Added!");
+            Program.rBool = true;
+            Program.Main();
             
 
         }

@@ -93,17 +93,10 @@ public class StorageLocations
         {
             int subCount = 0;
             bool sublocations = false;
-            Console.WriteLine("Does this location have any sublocations? (y/N)");
-            string userInput = Console.ReadLine();
-            if (userInput == "y")
-            {
-                Console.WriteLine("Sublocation count: (nums only)");
-                subCount = int.Parse(Console.ReadLine());
-                sublocations = true;
-            }
+            
             
             int idIdx = 1;
-            int? parentID = null;
+            int? parentID = 1;
             StorageLocation storageLocation = new StorageLocation();
             storageLocation.Id = idIdx;
             
@@ -115,13 +108,22 @@ public class StorageLocations
             storageLocation.LocationCity = Console.ReadLine();
             Console.WriteLine("Location Type:");
             storageLocation.LocationType = Console.ReadLine();
-            
+            Console.WriteLine("Does this location have any sublocations? (y/N)");
+            string userInput = Console.ReadLine();
+            if (userInput == "y")
+            {
+                Console.WriteLine("Sublocation count: (nums only)");
+                subCount = int.Parse(Console.ReadLine());
+                sublocations = true;
+            }
+            Console.WriteLine("Line 119");
             storageLocation.ParentId = parentID;
             if (sublocations == true)
             {
                 
                 for (int i = 0; i <= subCount; i++)
                 {
+                    Console.WriteLine("For Loop");
                     StorageLocation subLocation = new StorageLocation(); 
                     subLocation.Id = idIdx + 1;
                     Console.WriteLine("Sub Location Name: ");
@@ -190,6 +192,7 @@ public class StorageLocations
         private string locationCountry;
         private string locationType;
         private int id;
+        private int? parentId;
        
         public StorageLocation Parent { get; set; }
         public List<StorageLocation> Children { get; set; }
