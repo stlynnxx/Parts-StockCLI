@@ -32,7 +32,7 @@ public class Sourcing
                     Console.WriteLine("You chose four");
                     break;
                 case "5":
-                    Program.rBool = true;
+                    Program.rBool = false;
                     Program.Main();
                     break;
                 default:
@@ -41,7 +41,7 @@ public class Sourcing
             
             }
             // Console.Clear();
-            Program.rBool = true;
+            Program.rBool = false;
             Program.Main();
 
         }

@@ -239,3 +239,10 @@ for too much from me. I had intended to base it on the search by name feature as
 that I need to go back over that feature a bit and make sense of my code. So, that's where I'm at now, at least 
 after I take my dog outside, that is. 
 
+7/6/2026-
+
+Whenever loading a storage location by name, the debug statements are still printing, and it's printing not only
+the entry corrosponding with the searched term but seemingly the entire location list. Just more stuff to address!
+
+
+I did a rough fix for that issue by introducing a simple counter to count out the line amount for a single entry!

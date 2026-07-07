@@ -64,7 +64,7 @@ public class AddItem
             items.Add(item);
             File.WriteAllText(path, JsonSerializer.Serialize(items, options));
             Console.WriteLine("Item Added!");
-            Program.rBool = true;
+            Program.rBool = false;
             Program.Main();
             
 

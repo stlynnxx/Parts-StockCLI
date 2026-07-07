@@ -36,14 +36,18 @@ public class StorageLocations
             }
             
         }
+        
         // This is going to be for loading the entire Storage Locations list
         string LoadList(string path)
         {   string load = File.ReadAllText(path);
             return load;
         }
+        
+        
         // This will be for searching for a specific storage location via name
         void SearchByName(string path)
         {
+            int lineCounter = 0;
             string[] appends = new string[50];
             Console.WriteLine("Enter the name to search by: ");
             string userInput = Console.ReadLine();
@@ -60,8 +64,8 @@ public class StorageLocations
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    Console.WriteLine($"line check: {line}");
-                    Console.WriteLine("Line check level");
+                    // Console.WriteLine($"line check: {line}");
+                    // Console.WriteLine("Line check level");
                     
                     if (line.Contains(userInput))
                     {
@@ -69,11 +73,17 @@ public class StorageLocations
                         appends[0] = line;
                         for (int i = 1; i < appends.Length; i++)
                         {
+                            if (lineCounter > 5)
+                            {
+                                break;
+                            }
                             line = sr.ReadLine();
                             appends[i] = line;
-
-
+                            lineCounter++;
                             
+
+
+
                         }
 
                         break;
