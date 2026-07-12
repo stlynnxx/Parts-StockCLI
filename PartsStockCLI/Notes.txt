@@ -246,3 +246,10 @@ the entry corrosponding with the searched term but seemingly the entire location
 
 
 I did a rough fix for that issue by introducing a simple counter to count out the line amount for a single entry!
+
+7/12/2026-
+
+I was able to get the core functionality of searching by item number figured out today and now it just needs some 
+tweaking, which I plan to continue on next. I also made an actual issues list and to do list seperate from the journal, 
+which is obviously much better. 
+

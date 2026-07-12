@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace PartsStockCLI;
 
@@ -41,6 +42,7 @@ public class ItemSearch
 
                 break;
             case "2":
+                SearchByNumber(delimiter);
                 // Item number
                 break;
             case "3":
@@ -58,10 +60,12 @@ public class ItemSearch
     {
         Console.WriteLine("Enter item number: ");
         int itemNum = Convert.ToInt32(Console.ReadLine());
-        StreamReader sw =
-            new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "ItemList.json"));
-        string line = sw.ReadLine();
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ItemList.json");
+        string lines = File.ReadAllText(path);
+        List<Item> items = 
+            JsonSerializer.Deserialize<List<Item>>(lines);
+        Item found = items.FirstOrDefault(i => i.ItemNumber == itemNum);
+        Console.WriteLine($"Found:  {found}");
     }
 
     public void SearchByName(string delimiter)
@@ -131,5 +135,26 @@ public class ItemSearch
         }
         Console.WriteLine("Return Reached!");
         
-    } 
+    }
+
+    public class Item
+    {
+        public string ItemName { get; set; }
+        public int ItemNumber { get; set; }
+        public string ItemDescript { get; set; }
+        public int ItemPrice { get; set; }
+        public int Quantity { get; set; }
+        public int Stock { get; set; }
+        public string PurchaseDate { get; set; }
+        public string StorageLocation { get; set; }
+        
+
+        public override string ToString()
+        {
+            return $"Item Name: {ItemName} | Item Number: {ItemNumber}\n" +
+                   $"Item Description: {ItemDescript} | Item Price: {ItemPrice}" +
+                   $"Quantity: {Quantity} | Stock: {Stock} " +
+                   $"Purchase Date: {PurchaseDate} | Storage Location: {StorageLocation}";
+        }
+    }
 }
