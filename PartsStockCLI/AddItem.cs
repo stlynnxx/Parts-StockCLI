@@ -79,7 +79,7 @@ public class AddItem
             Console.WriteLine("Item Description: ");
             item.ItemDescription = Console.ReadLine();
             Console.WriteLine("Item Price: NUMS ONLY ");
-            item.ItemPrice = Console.ReadLine();
+            item.ItemPrice = Convert.ToDecimal(Console.ReadLine());
             Console.WriteLine("Item Quantity: NUMS ONLY ");
             item.ItemQuantity = int.Parse(Console.ReadLine());
             Console.WriteLine("Item Stock: NUMS ONLY ");
@@ -98,7 +98,7 @@ public class AddItem
         private string itemName;
         private int itemNumber;
         private string itemDescription;
-        private string itemPrice;
+        private decimal itemPrice;
         private int itemQuantity;
         private int itemStock;
         private string itemPurchaseDate;
@@ -123,7 +123,7 @@ public class AddItem
             set { itemDescription = value; }
         }
 
-        public string ItemPrice
+        public decimal ItemPrice
         {
             get { return itemPrice; }
             set { itemPrice = value; }

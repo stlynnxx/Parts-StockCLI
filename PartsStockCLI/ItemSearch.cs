@@ -65,7 +65,16 @@ public class ItemSearch
         List<Item> items = 
             JsonSerializer.Deserialize<List<Item>>(lines);
         Item found = items.FirstOrDefault(i => i.ItemNumber == itemNum);
-        Console.WriteLine($"Found:  {found}");
+        if (found != null)
+        {
+            Console.WriteLine($"Found: {found}");
+        }
+        else
+        {
+            Console.WriteLine("Found null error");
+            
+        }
+
     }
 
     public void SearchByName(string delimiter)
@@ -142,7 +151,7 @@ public class ItemSearch
         public string ItemName { get; set; }
         public int ItemNumber { get; set; }
         public string ItemDescript { get; set; }
-        public int ItemPrice { get; set; }
+        public decimal ItemPrice { get; set; }
         public int Quantity { get; set; }
         public int Stock { get; set; }
         public string PurchaseDate { get; set; }

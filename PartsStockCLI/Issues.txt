@@ -2,12 +2,12 @@ This is the issues list -
     New entries should include the date they are added (ADDED: Date_of_add) and any solved issues should be tagged with SOLVED: Date_of_solve.
 
 
-- After adding a new item, the program should go back to the main menu instead of ending. (ADDED: 7/26/26, SOLVED 7/26/26)
-- Search by item name returns extremely messy results and then ends the program. It too should loop back to the main menu. (ADDED: 7/26/26)
-- Search by Storage Location immediately ends the program. Looking at the ItemList.json file, Storage Location is being saved as a null entry. (ADDED: 7/26/26) 
-- Search by Item Number immediately ends the program. (ADDED: 7/26/26)
-- Creating a new storage location ends in a stack overflow. (ADDED: 7/26/26)
-- Review Sourcing Locations is not functional. (ADDED: 7.26.26)
+- After adding a new item, the program should go back to the main menu instead of ending. (ADDED: 6/26/26, SOLVED 7/26/26)
+- Search by item name returns extremely messy results and then ends the program. It too should loop back to the main menu. (ADDED: 6/26/26)
+- Search by Storage Location immediately ends the program. Looking at the ItemList.json file, Storage Location is being saved as a null entry. (ADDED: 6/26/26)
+- Search by Item Number immediately ends the program. (ADDED: 6/26/26, SOLVED 7/13/2026)
+- Creating a new storage location ends in a stack overflow. (ADDED: 6/26/26)
+- Review Sourcing Locations is not functional. (ADDED: 6.26.26)
 
 To Do List-
     Things that I would like to see in the project at some point, following the same format as the issues list. 

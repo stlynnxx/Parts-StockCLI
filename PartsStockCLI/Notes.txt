@@ -253,3 +253,11 @@ I was able to get the core functionality of searching by item number figured out
 tweaking, which I plan to continue on next. I also made an actual issues list and to do list seperate from the journal, 
 which is obviously much better. 
 
+7/13/2026-
+
+I'd been having some type mismatch issues in saving and recalling item information that we've been working on this evening,
+specifically in the Item Price, but I was able to sort that out by fixing data types across the program and then clearing out
+the ItemList.json file and adding an updated test entry with the correct types. After that, the search worked! 
+
+It's probably all I'll do today as it's been a very personally stressful day and it's getting late, but it is still
+good progress.  
