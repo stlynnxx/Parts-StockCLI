@@ -260,4 +260,33 @@ specifically in the Item Price, but I was able to sort that out by fixing data t
 the ItemList.json file and adding an updated test entry with the correct types. After that, the search worked! 
 
 It's probably all I'll do today as it's been a very personally stressful day and it's getting late, but it is still
-good progress.  
+good progress. 
+
+7/14/2026-
+
+Something in the logic for adding a new storage location is throwing a stack overflow,
+from the error message I suspect it to be something with the parent ID. So that's where I'm at 
+as of right now!
+
+Yeah, we are stopping hard after line 129 and the parentID stuff is 130, so that confirms that.
+
+If we comment out the parentID line then we get down to line 157 but we still get a stack overflow.
+
+The issue was a typo in the backing field!
+
+Onto other things.
+
+I noticed that while adding sub locations to a new storage location, although I entered a sublocation
+value of 1, it prompted me to title 2 sublocations. 
+
+I also don't see the sublocation in the storage locations .json file. 
+
+I think the name prompting not matching the entered value was being caused by 
+a for loop declaration.
+
+It indeed was being caused by the for loop, but fixing that didn't fix the logic issues. 
+
+
+I think that I need to work on some logic that actually combines the sublocation with the parent
+location; as of right now, it seems, the sublocation is being generated internally but is
+never actually serialized and saved to json but the parent location is.

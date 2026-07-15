@@ -105,7 +105,7 @@ public class StorageLocations
             bool sublocations = false;
             
             
-            int idIdx = 1;
+            int? idIdx = 1;
             int? parentID = 1;
             StorageLocation storageLocation = new StorageLocation();
             storageLocation.Id = idIdx;
@@ -126,12 +126,14 @@ public class StorageLocations
                 subCount = int.Parse(Console.ReadLine());
                 sublocations = true;
             }
-            Console.WriteLine("Line 119");
+            Console.WriteLine("Line 129");
             storageLocation.ParentId = parentID;
+            Console.WriteLine("Line 131");
             if (sublocations == true)
             {
+                Console.WriteLine("Line 134");
                 
-                for (int i = 0; i <= subCount; i++)
+                for (int i = 0; i < subCount; i++)
                 {
                     Console.WriteLine("For Loop");
                     StorageLocation subLocation = new StorageLocation(); 
@@ -143,19 +145,27 @@ public class StorageLocations
                 }
             }
 
+            Console.WriteLine("Line 146");
+
             if (!File.Exists(path))
             {
+                Console.WriteLine("Line 152");
                 Console.WriteLine("path null");
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
             }
-           
+           Console.WriteLine("Line 157");
             
             
             var options = new JsonSerializerOptions { WriteIndented = true };
+            Console.WriteLine("Line 161");
             List<StorageLocation> loc = JsonSerializer.Deserialize<List<StorageLocation>>(File.ReadAllText(path));
+            Console.WriteLine("Line 163");
+            
             loc.Add(storageLocation);
+            Console.WriteLine("Line 165");
             File.WriteAllText(path, JsonSerializer.Serialize(loc, options));    
+            Console.WriteLine("Line 167");
         }
 
         // This is where the user decides what they want to do 
@@ -201,7 +211,7 @@ public class StorageLocations
         private string locationState;
         private string locationCountry;
         private string locationType;
-        private int id;
+        private int? id;
         private int? parentId;
        
         public StorageLocation Parent { get; set; }
@@ -225,12 +235,12 @@ public class StorageLocations
 
         public string LocationType
         {
-            get { return this.locationState; }
-            set { this.locationState = value; }
+            get { return this.locationType; }
+            set { this.locationType = value; }
         }
         
 
-        public int Id
+        public int? Id
         {
             get { return this.id; }
             set { this.id = value; }
@@ -238,8 +248,8 @@ public class StorageLocations
 
         public int? ParentId
         {
-            get { return this.ParentId; }
-            set {  this.ParentId = value; }
+            get { return this.parentId; }
+            set {  this.parentId = value; }
         }
     }
 
