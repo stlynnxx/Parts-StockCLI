@@ -290,3 +290,29 @@ It indeed was being caused by the for loop, but fixing that didn't fix the logic
 I think that I need to work on some logic that actually combines the sublocation with the parent
 location; as of right now, it seems, the sublocation is being generated internally but is
 never actually serialized and saved to json but the parent location is.
+
+7/16/2026-
+
+I've made a bit of progress where I left off at last time, getting the sublocations 
+properly assocatied with the parent location and saved to file accordingly, although it is 
+not yet perfect. Things immediately standing out to me:
+    - The for loop collecting sublocation names is not counting correctly and thus running extra times
+    - The results being written to file are very messy
+    - I got this error last run: 
+        Unhandled exception. System.Text.Json.JsonException: The JSON value could not be converted to System.Collections.Generic.List`1[PartsStockCLI.StorageLocations+StorageLocation]. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+           at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+           at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TCollection& value)
+           at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+           at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+           at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+           at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+           at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+           at PartsStockCLI.StorageLocations.<StorageMain>g__createLocation|0_3(String path) in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/StorageLocations.cs:line 180
+           at PartsStockCLI.StorageLocations.<StorageMain>g__StorageMenu|0_4(String path) in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/StorageLocations.cs:line 210
+           at PartsStockCLI.StorageLocations.StorageMain() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/StorageLocations.cs:line 15
+           at PartsStockCLI.Program.Route.Routed() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/Program.cs:line 89
+           at PartsStockCLI.Program.Main() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/Program.cs:line 17
+           at PartsStockCLI.Program.Route.Routed() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/Program.cs:line 100
+           at PartsStockCLI.Program.Main() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/Program.cs:line 17
+           
+        

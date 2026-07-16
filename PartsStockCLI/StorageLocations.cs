@@ -129,9 +129,23 @@ public class StorageLocations
             Console.WriteLine("Line 129");
             storageLocation.ParentId = parentID;
             Console.WriteLine("Line 131");
+            storageLocation.Children = new List<StorageLocation>();
             if (sublocations == true)
             {
-                Console.WriteLine("Line 134");
+                Console.WriteLine("Line 135");
+                if (sublocations == true)
+                {
+                    for (int i = 0; i < subCount; i++)
+                    {
+                        StorageLocation subLocation = new StorageLocation();
+                        subLocation.Id = idIdx + i + 1;
+                        Console.WriteLine("Sublocation Name: ");
+                        subLocation.LocationName = Console.ReadLine();
+                        subLocation.ParentId = storageLocation.Id;
+                        subLocation.Parent = storageLocation;
+                        storageLocation.Children.Add(subLocation);
+                    }
+                }
                 
                 for (int i = 0; i < subCount; i++)
                 {
@@ -157,7 +171,11 @@ public class StorageLocations
            Console.WriteLine("Line 157");
             
             
-            var options = new JsonSerializerOptions { WriteIndented = true };
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+            };
             Console.WriteLine("Line 161");
             List<StorageLocation> loc = JsonSerializer.Deserialize<List<StorageLocation>>(File.ReadAllText(path));
             Console.WriteLine("Line 163");
@@ -201,6 +219,25 @@ public class StorageLocations
 
 }
 
+    public class SaveLocation
+    {
+        private string locationName;
+        private string details;
+        private string locationCity;
+        private string locationState;
+        private string locationCountry;
+    }
+
+    public class SubLocation
+    {
+        private string locationName;
+        private string parentLocationName;
+        private int? id;
+        private int? parentId;
+        public SubLocation Parent { get; set; }
+        public List<SubLocation> Children { get; set; }
+    }
+
     public class StorageLocation
     {
        
@@ -216,6 +253,7 @@ public class StorageLocations
        
         public StorageLocation Parent { get; set; }
         public List<StorageLocation> Children { get; set; }
+        
 
         public string LocationName {
             get { return this.locationName; }
