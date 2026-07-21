@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text.Json;
 
 namespace PartsStockCLI;
@@ -6,14 +7,15 @@ public class StorageLocations
 {
     public void StorageMain()
     {
+        // This needs error handling
         string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
             "StorageLocations.json");
-        
-        
+
+
         // string borderDashes = "--------";
-        
+
         StorageMenu(path);
-        
+
         // If a user wants to load a location, this menu is called for the load parameter
         void LoadLocationMenu(string path)
         {
@@ -27,23 +29,24 @@ public class StorageLocations
                     break;
                 case "2":
                     SearchByName(path);
-                    
+
                     break;
                 default:
                     Console.WriteLine("Invalid Input");
                     break;
-                
+
             }
-            
+
         }
-        
+
         // This is going to be for loading the entire Storage Locations list
         string LoadList(string path)
-        {   string load = File.ReadAllText(path);
+        {
+            string load = File.ReadAllText(path);
             return load;
         }
-        
-        
+
+
         // This will be for searching for a specific storage location via name
         void SearchByName(string path)
         {
@@ -66,10 +69,10 @@ public class StorageLocations
                 {
                     // Console.WriteLine($"line check: {line}");
                     // Console.WriteLine("Line check level");
-                    
+
                     if (line.Contains(userInput))
                     {
-                        
+
                         appends[0] = line;
                         for (int i = 1; i < appends.Length; i++)
                         {
@@ -77,10 +80,11 @@ public class StorageLocations
                             {
                                 break;
                             }
+
                             line = sr.ReadLine();
                             appends[i] = line;
                             lineCounter++;
-                            
+
 
 
 
@@ -89,27 +93,45 @@ public class StorageLocations
                         break;
                     }
                 }
-            }   
+            }
+
             Console.WriteLine("WriteLine Reached");
-            for (int k = 0; k < appends.Length; k++) {
+            for (int k = 0; k < appends.Length; k++)
+            {
                 Console.WriteLine(appends[k]);
             }
 
-            
+
         }
 
         // This is for creating a new storage location
         void createLocation(string path)
         {
-            int subCount = 0;
-            bool sublocations = false;
-            
-            
+            // Var declarations
             int? idIdx = 1;
             int? parentID = 1;
+            int subCount = 0;
+            bool sublocations = false;
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+            };
             StorageLocation storageLocation = new StorageLocation();
-            storageLocation.Id = idIdx;
             
+            // Loading JSON file
+            List<StorageLocation> loc = JsonSerializer.Deserialize<List<StorageLocation>>(File.ReadAllText(path), options);
+            
+            // Establishing parentID start point
+            int locCount = loc.Count;
+           
+            if (locCount >= 1)
+            {
+                locCount++;
+                parentID = locCount;
+            }
+
+            storageLocation.Id = idIdx;
             Console.WriteLine("Location Name:");
             storageLocation.LocationName = Console.ReadLine();
             Console.WriteLine("Details: ");
@@ -126,38 +148,26 @@ public class StorageLocations
                 subCount = int.Parse(Console.ReadLine());
                 sublocations = true;
             }
+
             Console.WriteLine("Line 129");
             storageLocation.ParentId = parentID;
             Console.WriteLine("Line 131");
             storageLocation.Children = new List<StorageLocation>();
             if (sublocations == true)
             {
-                Console.WriteLine("Line 135");
-                if (sublocations == true)
-                {
-                    for (int i = 0; i < subCount; i++)
-                    {
-                        StorageLocation subLocation = new StorageLocation();
-                        subLocation.Id = idIdx + i + 1;
-                        Console.WriteLine("Sublocation Name: ");
-                        subLocation.LocationName = Console.ReadLine();
-                        subLocation.ParentId = storageLocation.Id;
-                        subLocation.Parent = storageLocation;
-                        storageLocation.Children.Add(subLocation);
-                    }
-                }
-                
                 for (int i = 0; i < subCount; i++)
                 {
-                    Console.WriteLine("For Loop");
-                    StorageLocation subLocation = new StorageLocation(); 
-                    subLocation.Id = idIdx + 1;
-                    Console.WriteLine("Sub Location Name: ");
+                    StorageLocation subLocation = new StorageLocation();
+                    subLocation.Id = idIdx + i + 1;
+                    Console.WriteLine("Sublocation Name: ");
                     subLocation.LocationName = Console.ReadLine();
-                    subLocation.ParentId = 1;
+                    subLocation.ParentId = storageLocation.Id;
                     subLocation.Parent = storageLocation;
+                    storageLocation.Children.Add(subLocation);
                 }
             }
+
+
 
             Console.WriteLine("Line 146");
 
@@ -168,56 +178,46 @@ public class StorageLocations
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
             }
-           Console.WriteLine("Line 157");
-            
-            
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
-            };
-            Console.WriteLine("Line 161");
-            List<StorageLocation> loc = JsonSerializer.Deserialize<List<StorageLocation>>(File.ReadAllText(path));
-            Console.WriteLine("Line 163");
-            
+            Console.WriteLine("Line 169");
+           
             loc.Add(storageLocation);
-            Console.WriteLine("Line 165");
-            File.WriteAllText(path, JsonSerializer.Serialize(loc, options));    
-            Console.WriteLine("Line 167");
+            File.WriteAllText(path, JsonSerializer.Serialize(loc, options));
         }
 
         // This is where the user decides what they want to do 
         void StorageMenu(string path)
         {
-            
+
             string storageMenu = "1)Load Storage Location\n" +
-                                  "2)Edit Storage Location\n" +
+                                 "2)Edit Storage Location\n" +
                                  "3)Create New Storage Location\n";
 
-            
+
             Console.WriteLine("Storage Menu\n");
             Console.WriteLine(storageMenu);
-            
+
             string userInput = Console.ReadLine();
-                switch (userInput) {
-                    case "1": 
-                        LoadLocationMenu(path);
+            switch (userInput)
+            {
+                case "1":
+                    LoadLocationMenu(path);
                     break;
-                    case "2":
-                        Console.WriteLine("You chose 2");
+                case "2":
+                    Console.WriteLine("You chose 2");
                     break;
-                    case "3":
-                        createLocation(path);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid Input");
+                case "3":
+                    createLocation(path);
+                    break;
+                default:
+                    Console.WriteLine("Invalid Input");
                     break;
             }
-                
-            
-}
 
-}
+
+
+
+        }
+    }
 
     public class SaveLocation
     {

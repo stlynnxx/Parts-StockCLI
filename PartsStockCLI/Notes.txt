@@ -315,4 +315,16 @@ not yet perfect. Things immediately standing out to me:
            at PartsStockCLI.Program.Route.Routed() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/Program.cs:line 100
            at PartsStockCLI.Program.Main() in /home/steviexx/RiderProjects/PartsStockCLI/PartsStockCLI/Program.cs:line 17
            
-        
+7/20/2026-
+
+The looping issue was because I had two actual loops written and didn't realize I'd left the old one in, and the errors were from not using my options with the json serializer! Very silly of me
+and now I can move forward!
+
+Reading over the json being saved to file it seems that the ID system is sort of working, but not correctly, at least not yet. 
+
+Looking at the IDs i'm realizing that the parent ID needs a solid system for checking the highest one in file and then starting new from there instead of at one. 
+There's also just a lot of unnesecary info being written to the file that makes it all harder to read and tell what's going on, but, the parent child relationship
+system isn't far from functioning close to intended, I just need to clean up this output and get some tweaks made. 
+
+I'm  still having issues in StorageLocations, but we did make at least some progress for the night. Right now we're having issues deserializing the file for
+an unknown reason. 
