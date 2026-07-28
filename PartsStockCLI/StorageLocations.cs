@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PartsStockCLI;
 
@@ -115,7 +116,7 @@ public class StorageLocations
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+                
             };
             StorageLocation storageLocation = new StorageLocation();
             
@@ -251,33 +252,35 @@ public class StorageLocations
         private int? id;
         private int? parentId;
        
+       [JsonIgnore]
         public StorageLocation Parent { get; set; }
+        [JsonPropertyOrder(69)]
         public List<StorageLocation> Children { get; set; }
         
-
+        [JsonPropertyOrder(0)]
         public string LocationName {
             get { return this.locationName; }
             set { this.locationName = value; }
         }
-
+        [JsonPropertyOrder(4)]
         public string Details
         {
             get { return this.details; }
             set { this.details = value; }
         }
-
+        [JsonPropertyOrder(2)]
         public string LocationCity {
             get { return this.locationCity; }
             set { this.locationCity = value; }
         }
-
+        [JsonPropertyOrder(3)]
         public string LocationType
         {
             get { return this.locationType; }
             set { this.locationType = value; }
         }
         
-
+        [JsonPropertyOrder(1)]
         public int? Id
         {
             get { return this.id; }

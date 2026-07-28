@@ -10,8 +10,10 @@ This is the issues list -
 - Review Sourcing Locations is not functional. (ADDED: 6.26.26)
 - Between lines 129 and 146, in StorageLocations, something in the adding a storage location process
 is throwing a stack overflow. (ADDED: 7/14/2026, SOLVED: 7/14/2026)
-- Sublocations not saving to storage locations list (ADDED: 7/14/2026)
+- Sublocations not saving to storage locations list (ADDED: 7/14/2026. FIXED: 7/28/2026)
 - Id/ParentID system in storage locations not working as intended (ADDED: 7/14/2026)
+- Error handling for StorageLocations.json not existing needs added- if the file does not
+yet exist, create it (ADDED: 7/27/2026)
 
 To Do List-
     Things that I would like to see in the project at some point, following the same format as the issues list. 
