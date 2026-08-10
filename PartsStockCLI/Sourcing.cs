@@ -77,6 +77,9 @@ public class Sourcing
         
             Console.WriteLine("Location Address: ");
             sourcingLocation.LocationAddress = Console.ReadLine(); 
+            
+            Console.WriteLine("Location State: ");
+            sourcingLocation.LocationState = Console.ReadLine();
         
             Console.WriteLine("Location Type: ");
             sourcingLocation.LocationCity = Console.ReadLine();

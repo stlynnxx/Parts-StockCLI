@@ -365,3 +365,20 @@ Okay, I got that cleaned up, and next I need to make sure that certain fields ar
 the parent to the children, such as location city. But it's at least readable now!
 I cut out ReferenceHandle.Preserve and manually set the order for the JSON and that did the trick.
 
+
+8/10/2026-
+
+It's been awhile since I've been in here, and I lost my mom during that time so I'm refreshing myself as to where 
+I aas at and where I'm going, to begin. 
+
+Two things that immediately stood out to me while just trying out various features;
+Sourcing.cs is not prompting the user for the location state but is recording it as null in the 
+JSON file. Also, I've yet to build logic for associating a given storage location with a newly added item.
+
+Just places to start! I made the sourcing location state bug an issue on Github, although I'll probably wind up
+fixing it myself soon.
+
+ Item search is printing a bunch of unnecessary data and not much relevant data.
+ 
+ I went ahead and fixed the location state issue since it was a super quick and simple win I could grab. 
+ 

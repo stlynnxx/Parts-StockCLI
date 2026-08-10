@@ -14,6 +14,8 @@ is throwing a stack overflow. (ADDED: 7/14/2026, SOLVED: 7/14/2026)
 - Id/ParentID system in storage locations not working as intended (ADDED: 7/14/2026)
 - Error handling for StorageLocations.json not existing needs added- if the file does not
 yet exist, create it (ADDED: 7/27/2026)
+- After adding a storage location, the program needs to loop back to the main menu 
+instead of terminating (ADDED: 7/31/2026)
 
 To Do List-
     Things that I would like to see in the project at some point, following the same format as the issues list. 
