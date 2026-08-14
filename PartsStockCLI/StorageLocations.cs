@@ -29,7 +29,7 @@ public class StorageLocations
                     Console.WriteLine(LoadList(path));
                     break;
                 case "2":
-                    NameSearch(path);
+                    // NameSearch.search(path);
 
                     break;
                 default:
@@ -164,7 +164,7 @@ public class StorageLocations
     }
     public class NameSearch(string path)
     {
-        void search()
+        public void search()
         {
             int lineCounter = 0;
             string[] appends = new string[50];
@@ -296,4 +296,3 @@ public class StorageLocations
         }
     }
 
-}

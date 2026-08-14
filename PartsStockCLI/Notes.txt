@@ -388,3 +388,10 @@ Mostly light work tonight as it was a long day and I'm already tired; I added so
 lookup being added to the Additem process that took me much longer than it should've because I'm fighting sleep.
 There's more work to do whenever i'm well rested enough to do it. 
 
+8/14/2026-
+
+2:12 AM-
+I stayed awake for too long and now I'm not tired but I need to go to bed so i'm pecking around a bit more in here.
+I did some more work on the associating a storage location with a newly added item goal and now I'm tired again
+
+THe logic runs but the file still shows null. Its progress regardless. I'm now too tired to continue.
