@@ -6,6 +6,9 @@ The goal is to build a fast, intuitive, granular system capable of tracking ever
 ## Current Status
 
 Parts&Stock is currently in an early CLI phase and in active development. 
+This is the dev branch. Currently this is the only version of the program,
+whenever v1.0.0 launches it will be on a different branch and this one 
+will be a development version. 
 
 Current features include: 
 - Adding inventory items
