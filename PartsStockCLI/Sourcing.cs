@@ -103,15 +103,7 @@ public class Sourcing
             Console.WriteLine(e);
             throw;
         }
-        
-        
-        
-        
-
     }
-
-
-
     void LoadSourcingLocation(string dashes, string path)
     {
         Console.WriteLine("Enter the Sourcing Location: ");

@@ -29,7 +29,7 @@ public class StorageLocations
                     Console.WriteLine(LoadList(path));
                     break;
                 case "2":
-                    SearchByName(path);
+                    NameSearch(path);
 
                     break;
                 default:
@@ -47,64 +47,7 @@ public class StorageLocations
             return load;
         }
 
-
-        // This will be for searching for a specific storage location via name
-        void SearchByName(string path)
-        {
-            int lineCounter = 0;
-            string[] appends = new string[50];
-            Console.WriteLine("Enter the name to search by: ");
-            string userInput = Console.ReadLine();
-            //string loadedFile = LoadList(path);
-            using (StreamReader sr = new StreamReader(path))
-            {
-                string line = sr.ReadLine();
-                // string fullFile = sr.ReadToEnd();
-                // int fileLen =  fullFile.Length;
-                if (line == null)
-                {
-                    Console.WriteLine($"Line Null, line: {line}");
-                }
-
-                while ((line = sr.ReadLine()) != null)
-                {
-                    // Console.WriteLine($"line check: {line}");
-                    // Console.WriteLine("Line check level");
-
-                    if (line.Contains(userInput))
-                    {
-
-                        appends[0] = line;
-                        for (int i = 1; i < appends.Length; i++)
-                        {
-                            if (lineCounter > 5)
-                            {
-                                break;
-                            }
-
-                            line = sr.ReadLine();
-                            appends[i] = line;
-                            lineCounter++;
-
-
-
-
-                        }
-
-                        break;
-                    }
-                }
-            }
-
-            Console.WriteLine("WriteLine Reached");
-            for (int k = 0; k < appends.Length; k++)
-            {
-                Console.WriteLine(appends[k]);
-            }
-
-
-        }
-
+        
         // This is for creating a new storage location
         void createLocation(string path)
         {
@@ -218,6 +161,65 @@ public class StorageLocations
 
 
         }
+    }
+    public class NameSearch(string path)
+    {
+        void search()
+        {
+            int lineCounter = 0;
+            string[] appends = new string[50];
+            Console.WriteLine("Enter the name to search by: ");
+            string userInput = Console.ReadLine();
+            //string loadedFile = LoadList(path);
+            using (StreamReader sr = new StreamReader(path))
+            {
+                string line = sr.ReadLine();
+                // string fullFile = sr.ReadToEnd();
+                // int fileLen =  fullFile.Length;
+                if (line == null)
+                {
+                    Console.WriteLine($"Line Null, line: {line}");
+                }
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    // Console.WriteLine($"line check: {line}");
+                    // Console.WriteLine("Line check level");
+
+                    if (line.Contains(userInput))
+                    {
+
+                        appends[0] = line;
+                        for (int i = 1; i < appends.Length; i++)
+                        {
+                            if (lineCounter > 5)
+                            {
+                                break;
+                            }
+
+                            line = sr.ReadLine();
+                            appends[i] = line;
+                            lineCounter++;
+
+
+
+
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            Console.WriteLine("WriteLine Reached");
+            for (int k = 0; k < appends.Length; k++)
+            {
+                Console.WriteLine(appends[k]);
+            }
+        }
+    }
+
+
     }
 
     public class SaveLocation

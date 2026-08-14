@@ -384,3 +384,7 @@ fixing it myself soon.
  
 8/13/2026-
 
+Mostly light work tonight as it was a long day and I'm already tired; I added some basic logic for storage location
+lookup being added to the Additem process that took me much longer than it should've because I'm fighting sleep.
+There's more work to do whenever i'm well rested enough to do it. 
+

@@ -1,5 +1,6 @@
+using System.Security.Cryptography;
 using System.Text.Json;
-
+using PartsStockCLI;
 namespace PartsStockCLI;
 
 public class AddItem
@@ -10,13 +11,16 @@ public class AddItem
         /* caller() collects the input for the new item fields and
          assigns them, appender appends them*/
         Item newItem = new Item();
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "ItemList.json");
+        string storagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "StorageLocations.json");
         caller(newItem);
 
         void appender(Item item)
         {
             bool isNewFile = false;
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "ItemList.json");
+            
             if (!File.Exists(path))
             {
                 Console.WriteLine("path null");
@@ -86,6 +90,21 @@ public class AddItem
             item.ItemStock = int.Parse(Console.ReadLine());
             Console.WriteLine("Item PurchaseDate: ");
             item.ItemPurchaseDate = Console.ReadLine();
+            Console.WriteLine("Would you like to use a saved Storage Location for this item? (y/n)");
+            string storeQuestion =  Console.ReadLine();
+            storeQuestion =  storeQuestion.ToLower();
+            if (storeQuestion == "y")
+            {
+                
+                // This is where we will need to put the logic for associating a saved storage location
+                // We will need to search the storage locations, find the match, confirm, and then associate.
+                StorageLocations.NameSearch search = new StorageLocations.NameSearch(storagePath);
+
+            }
+            else if (storeQuestion == "n")
+            {
+                
+            }
             
             Console.WriteLine("--------");
             appender(item);
