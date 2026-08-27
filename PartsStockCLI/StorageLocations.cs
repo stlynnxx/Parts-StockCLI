@@ -29,7 +29,7 @@ public class StorageLocations
                     Console.WriteLine(LoadList(path));
                     break;
                 case "2":
-                    // NameSearch.search(path);
+                    NameSearch searcher = new NameSearch(path); searcher.search();
 
                     break;
                 default:
@@ -188,25 +188,21 @@ public class StorageLocations
 
                     if (line.Contains(userInput))
                     {
-
                         appends[0] = line;
-                        for (int i = 1; i < appends.Length; i++)
-                        {
-                            if (lineCounter > 5)
+                        int index = 1;
+                                              
+                            while((line = sr.ReadLine()) !=null && index < appends.Length) // Read until the end of the JSON block or array
                             {
-                                break;
+                                appends[index] = line;
+                                index++;
+
+                                if (line.Trim() == "}" || line.Trim() == "},") // Stop only when the main parent object block closes (e.g., "  }" or "  },") // avoiding early stops on child objects inside the array
+                                {
+                                    break;
+                                }
                             }
-
-                            line = sr.ReadLine();
-                            appends[i] = line;
-                            lineCounter++;
-
-
-
-
-                        }
-
-                        break;
+                            break;
+                                                         
                     }
                 }
             }
@@ -214,7 +210,11 @@ public class StorageLocations
             Console.WriteLine("WriteLine Reached");
             for (int k = 0; k < appends.Length; k++)
             {
-                Console.WriteLine(appends[k]);
+                if(!string.IsNullOrWhiteSpace(appends[k])) // Only print non empty slots to prevent blank lines
+                {
+                    Console.WriteLine(appends[k]);
+
+                }
             }
         }
     }
