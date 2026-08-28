@@ -256,43 +256,43 @@ public class StorageLocations
        
        [JsonIgnore]
         public StorageLocation Parent { get; set; }
-        [JsonPropertyOrder(69)]
-        public List<StorageLocation> Children { get; set; }
-        
+
+        // Explicit order so parent scalar fields write before Children (STJ defaults to declaration order; Children used to be declared first).
         [JsonPropertyOrder(0)]
         public string LocationName {
             get { return this.locationName; }
             set { this.locationName = value; }
         }
-        [JsonPropertyOrder(4)]
-        public string Details
-        {
-            get { return this.details; }
-            set { this.details = value; }
-        }
-        [JsonPropertyOrder(2)]
-        public string LocationCity {
-            get { return this.locationCity; }
-            set { this.locationCity = value; }
-        }
-        [JsonPropertyOrder(3)]
-        public string LocationType
-        {
-            get { return this.locationType; }
-            set { this.locationType = value; }
-        }
-        
         [JsonPropertyOrder(1)]
         public int? Id
         {
             get { return this.id; }
             set { this.id = value; }
         }
-
+        [JsonPropertyOrder(2)]
         public int? ParentId
         {
             get { return this.parentId; }
             set {  this.parentId = value; }
         }
+        [JsonPropertyOrder(3)]
+        public string LocationCity {
+            get { return this.locationCity; }
+            set { this.locationCity = value; }
+        }
+        [JsonPropertyOrder(4)]
+        public string LocationType
+        {
+            get { return this.locationType; }
+            set { this.locationType = value; }
+        }
+        [JsonPropertyOrder(5)]
+        public string Details
+        {
+            get { return this.details; }
+            set { this.details = value; }
+        }
+        [JsonPropertyOrder(6)]
+        public List<StorageLocation> Children { get; set; }
     }
 
