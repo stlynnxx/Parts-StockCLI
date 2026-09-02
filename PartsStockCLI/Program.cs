@@ -4,8 +4,7 @@
     {
         public static bool rBool = false;
         public static void Main()
-        {
-            
+        { 
             if (rBool == true)
             {
                 Display display = new Display();
@@ -23,8 +22,6 @@
         {
             public static void Art()
             {
-                
-                
                 Console.Title = "Parts Stock CLI";
                 Console.ForegroundColor = ConsoleColor.Green;
                 string art =

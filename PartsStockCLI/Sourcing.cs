@@ -31,7 +31,7 @@ public class Sourcing
                 case "4":
                     Console.WriteLine("You chose four");
                     break;
-                case "5":
+                case "B":
                     Program.rBool = false;
                     Program.Main();
                     break;
@@ -61,7 +61,7 @@ public class Sourcing
         Console.WriteLine("2) Load Sourcing Location");
         Console.WriteLine("3) Delete Sourcing Location");
         Console.WriteLine("4) Review Sourcing Locations");
-        Console.WriteLine("5) Home");
+        Console.WriteLine("B)Go back");
         Console.WriteLine("6) Exit Program");
         Console.WriteLine(dashes);
     }
@@ -108,6 +108,10 @@ public class Sourcing
     {
         Console.WriteLine("Enter the Sourcing Location: ");
         string searchParameter = Console.ReadLine();
+        if (searchParameter == "B")
+        {
+            Menu(dashes);
+        }
         // From here we need to get what we're searching for specifically 
         // from the loaded file
         

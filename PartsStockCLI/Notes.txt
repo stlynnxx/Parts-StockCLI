@@ -394,4 +394,22 @@ There's more work to do whenever i'm well rested enough to do it.
 I stayed awake for too long and now I'm not tired but I need to go to bed so i'm pecking around a bit more in here.
 I did some more work on the associating a storage location with a newly added item goal and now I'm tired again
 
-THe logic runs but the file still shows null. Its progress regardless. I'm now too tired to continue.
+The logic runs but the file still shows null. Its progress regardless. I'm now too tired to continue.
+
+9/2/2026-
+
+I'm back in here after more time away spent working on Slippery Penguin but now i'm planning to be getting back in here
+now that I got v2 shipped with that project.
+
+Thanks to some contributions the ball kept rolling a bit even in my absence!
+
+I'm poking around at the contributions and program in general and getting caught back up to where we were
+and I'm realizing that when making a new Storage Location, we're printing unnecessary fields that are null.
+
+Also, the program could really use a backwards navigation option, only being able to go forward sucks. 
+
+I added DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull to the json options to omit the ugly null writes!
+
+I also started adding a few backwards navigation options, starting in StorageLocations.cs
+
+
