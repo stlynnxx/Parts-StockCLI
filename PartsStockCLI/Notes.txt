@@ -412,4 +412,10 @@ I added DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull to the json
 
 I also started adding a few backwards navigation options, starting in StorageLocations.cs
 
+9/3/2026-
 
+So far today I've been cleaning up Program.cs; I added logioc for creating a dir to keep the json files in and 
+consolidated all of the scattered path declarations into Program and am passing them from there now, which is 
+much easier to manage. My plan moving forward is two fold; to go through what exists and clean it up and 
+get rid of some of the chaos and also set up an actual storage location with items from my shop to test the flow
+and smooth out any bugs that pop up. If I ge through those two things we'll be at a much better place in here. 

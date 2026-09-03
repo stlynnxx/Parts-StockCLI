@@ -5,16 +5,13 @@ namespace PartsStockCLI;
 
 public class AddItem
 {
-    public void NewItem()
+    public void NewItem(string directory, string path)
     {
         Console.Clear();
         /* caller() collects the input for the new item fields and
          assigns them, appender appends them*/
         Item newItem = new Item();
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "ItemList.json");
-        string storagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "StorageLocations.json");
+       
         caller(newItem);
 
         void appender(Item item)
@@ -68,7 +65,7 @@ public class AddItem
             items.Add(item);
             File.WriteAllText(path, JsonSerializer.Serialize(items, options));
             Console.WriteLine("Item Added!");
-            Program.rBool = false;
+            Program.displayBool = false;
             Program.Main();
 
 

@@ -5,13 +5,12 @@ namespace PartsStockCLI;
 
 public class Sourcing
 {
-    public void Main()
+    public void Main(string directory, string path)
     {
         try
         {
             Console.Clear();
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "Sourcing.json");
+            
             SourcingLocation sourcingLocation = new SourcingLocation();
             string dashes = "--------";
             Menu(dashes);
@@ -32,7 +31,7 @@ public class Sourcing
                     Console.WriteLine("You chose four");
                     break;
                 case "B":
-                    Program.rBool = false;
+                    Program.displayBool = false;
                     Program.Main();
                     break;
                 default:
@@ -41,7 +40,7 @@ public class Sourcing
             
             }
             // Console.Clear();
-            Program.rBool = false;
+            Program.displayBool = false;
             Program.Main();
 
         }

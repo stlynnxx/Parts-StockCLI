@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,23 +5,23 @@ namespace PartsStockCLI;
 
 public class StorageLocations
 {
-    public void StorageMain()
+    public void StorageMain(string directory, string path)
     {
 
         // This needs error handling
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "StorageLocations.json");
-        if (!File.Exists(path))
+        string storagePath =  Path.Combine(directory, "StorageLocations.json");    
+        
+        if (!File.Exists(storagePath))
         {
-            File.Create(path).Close();
-            File.WriteAllText(path, "[]");
+            File.Create(storagePath).Close();
+            File.WriteAllText(storagePath, "[]");
         }
 
 
         // string borderDashes = "--------";
 
 
-        StorageMenu(path);
+        StorageMenu(storagePath);
 
         // This is where the user decides what they want to do 
         void StorageMenu(string path)
