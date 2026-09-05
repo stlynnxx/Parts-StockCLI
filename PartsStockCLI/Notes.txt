@@ -419,3 +419,32 @@ consolidated all of the scattered path declarations into Program and am passing 
 much easier to manage. My plan moving forward is two fold; to go through what exists and clean it up and 
 get rid of some of the chaos and also set up an actual storage location with items from my shop to test the flow
 and smooth out any bugs that pop up. If I ge through those two things we'll be at a much better place in here. 
+
+
+9/4/2026-
+
+I'm setting up an irl storage location as a test and I have a thought: When collecting the sublocation names, we should
+do "Sublocation [x] Name:"
+
+After setting up a storage location, the program ends. I'm going to change it to go back to the main menu real quick.
+
+Whenever adding an item, associating a storage location is still writing the storage location field in the ItemList json
+as null.
+
+Also the directory logic I added the other day isn't perfect; it's creating an extra directory within the directory.
+
+Also, when adding an item, the program is only prompting for a general storage location, and makes no mention of any
+sublocations. 
+
+I deleted additem prompting for item stock as prompting for both quantity and stock is redundant. 
+
+We also need to go over the sourcing locations logic and make sure that's good and build logic for the option
+to associate a sourcing location with a new item.
+
+Collecting the sublocation count while setting up a new storage location needs better error handling. The entire program
+does, but that spot does too. 
+
+I fixed the directory issue, and added some issues on github!
+
+
+

@@ -5,7 +5,7 @@ namespace PartsStockCLI;
 
 public class AddItem
 {
-    public void NewItem(string directory, string path)
+    public void NewItem(string directory, string path, string storagePath)
     {
         Console.Clear();
         /* caller() collects the input for the new item fields and
@@ -54,7 +54,6 @@ public class AddItem
             appends.Add($"Item Description:  {item.ItemDescription}");
             appends.Add($"Item Price: {item.ItemPrice}");
             appends.Add($"Item Quantity: {item.ItemQuantity}");
-            appends.Add($"Item Stock: {item.ItemStock}");
             appends.Add($"Item PurchaseDate: {item.ItemPurchaseDate}");
             appends.Add("]\\n");
 
@@ -85,8 +84,6 @@ public class AddItem
             Console.WriteLine("Item Price: NUMS ONLY ");
             item.ItemPrice = Convert.ToDecimal(Console.ReadLine());
             Console.WriteLine("Item Quantity: NUMS ONLY ");
-            item.ItemQuantity = int.Parse(Console.ReadLine());
-            Console.WriteLine("Item Stock: NUMS ONLY ");
             item.ItemStock = int.Parse(Console.ReadLine());
             Console.WriteLine("Item PurchaseDate: ");
             item.ItemPurchaseDate = Console.ReadLine();

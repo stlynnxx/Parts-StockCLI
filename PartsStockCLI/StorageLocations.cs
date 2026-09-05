@@ -169,6 +169,8 @@ public class StorageLocations
 
             loc.Add(storageLocation);
             File.WriteAllText(path, JsonSerializer.Serialize(loc, options));
+            Console.Clear();
+            Program.Main();
         }
     }
 

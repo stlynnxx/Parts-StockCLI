@@ -14,8 +14,8 @@
 
             // Establishing a dir for the log files
             string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "PartsAndStock");
-            Directory.CreateDirectory(Path.Combine(directory, "PartsAndStock"));
+                "PartsAndStockA");
+            Directory.CreateDirectory(directory);
             // Establishing the file paths
             string storagePath = Path.Combine(directory, "StorageLocations.json");
             string sourcingPath = Path.Combine(directory, "Sourcing.json");
@@ -41,7 +41,7 @@
             switch (userIn)
             {
                 case 1:
-                    add.NewItem(directory, itemPath);
+                    add.NewItem(directory, itemPath, storagePath);
                     break;
                 case 2:
                     search.Menu();
