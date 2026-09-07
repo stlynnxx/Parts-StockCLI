@@ -92,6 +92,7 @@ public class StorageLocations
         void createLocation(string path)
         {
             // Var declarations
+            int sublocationCount = 0;
             int? idIdx = 1;
             int? parentID = 1;
             int subCount = 0;
@@ -144,8 +145,9 @@ public class StorageLocations
                 for (int i = 0; i < subCount; i++)
                 {
                     StorageLocation subLocation = new StorageLocation();
+                    sublocationCount++;
                     subLocation.Id = idIdx + i + 1;
-                    Console.WriteLine("Sublocation Name: ");
+                    Console.WriteLine($"Sublocation Name {sublocationCount}: ");
                     subLocation.LocationName = Console.ReadLine();
                     subLocation.ParentId = storageLocation.Id;
                     subLocation.Parent = storageLocation;

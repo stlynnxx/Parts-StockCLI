@@ -447,4 +447,16 @@ does, but that spot does too.
 I fixed the directory issue, and added some issues on github!
 
 
+9/7/2026-
+
+2:44 AM-
+It's the middle of the night and I need to sleep but I'm wide awake so I figured the best way to get myself tired would 
+be by messing around in here for bit.
+
+During collection of the sublocation names, I added the sublocation count to the print prompt so that the user can
+know they're on sublocation one, or sublocation two, and so forth.
+
+I went through sourcing a bit and moved somethings around anc cleaned up a bit. I also added the notes field, and now 
+i'm getting sleepy.
+
 
