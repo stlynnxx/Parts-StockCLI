@@ -459,4 +459,18 @@ know they're on sublocation one, or sublocation two, and so forth.
 I went through sourcing a bit and moved somethings around anc cleaned up a bit. I also added the notes field, and now 
 i'm getting sleepy.
 
+9/8/2026-
+
+So far this morning I've added logic for associating a sourcing location with a new item within additem, and just 
+cleaned up some messy brackets that were in additem as well. I'm gonna look for a few more wins before I shift gears 
+to another project for awhile. 
+
+
+I was running through the flow and we hit a crash at retrieeving the saved storage location to be associated with a new
+item. I had already checked the file before that and know that the storage location was successfully created and saved,
+so I need to dig into the error and see what happened still. 
+
+Another note- When collectiong the sublocation names, when there are a lot of sublocations that can fill 
+up the terminal quite quickly. Maybe we should consider clearing it after x amount of names? 
+
 

@@ -11,33 +11,26 @@ public class AddItem
         /* caller() collects the input for the new item fields and
          assigns them, appender appends them*/
         Item newItem = new Item();
-       
-        caller(newItem);
-
+        caller(newItem, path);
         void appender(Item item)
         {
             bool isNewFile = false;
-
             if (!File.Exists(path))
             {
                 Console.WriteLine("path null");
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
                 isNewFile = true;
-                // File.AppendAllText(path, JsonSerializer.Serialize("{ Items: {"));
-
-
+                // File.AppendAllText(path, JsonSerializer.Serialize("{ Items: {"))
             }
             else
             {
                 // Console.WriteLine("path already exists");
             }
-
             if (isNewFile == true)
             {
                 item.ItemNumber = 1;
             }
-
             if (isNewFile == false)
             {
 
@@ -45,20 +38,36 @@ public class AddItem
                 int count = doc.RootElement.GetArrayLength();
                 item.ItemNumber = count + 1;
             }
-
             List<string> appends = new List<string>();
-
-
             appends.Add($"[Item Name: {item.ItemName}");
             appends.Add($"Item Number: {item.ItemNumber}");
             appends.Add($"Item Description:  {item.ItemDescription}");
             appends.Add($"Item Price: {item.ItemPrice}");
             appends.Add($"Item Quantity: {item.ItemQuantity}");
             appends.Add($"Item PurchaseDate: {item.ItemPurchaseDate}");
+            Console.WriteLine("Would you like to add a storage location for this item? (y/n)");
+            string storageQuestion = Console.ReadLine();
+            storageQuestion = storageQuestion.ToLower();
+            bool confirm = false;
+            int timeout = 0;
+            if (storageQuestion == "y")
+            {
+                while (confirm == false)
+                {
+                    StorageLocations.NameSearch search = new StorageLocations.NameSearch(storagePath);
+                    search.search();
+                    Console.WriteLine("Is the shown location correct? (y/n)");
+                    string confirmStr = Console.ReadLine().ToLower();
+                    if (confirmStr == "y" || timeout == 2)
+                    {
+                        confirm = true;
+                    }
+                    timeout++;
+                } // End of while
+                Console.WriteLine("--------");
+                appender(item);
+            }
             appends.Add("]\\n");
-
-
-
             var options = new JsonSerializerOptions { WriteIndented = true };
             List<Item> items = JsonSerializer.Deserialize<List<Item>>(File.ReadAllText(path));
             items.Add(item);
@@ -66,12 +75,8 @@ public class AddItem
             Console.WriteLine("Item Added!");
             Program.displayBool = false;
             Program.Main();
-
-
         }
-
-
-        void caller(Item item)
+        void caller(Item item, string storagePath)
         {
             bool confirm = false;
             string confirmStr;
@@ -104,13 +109,16 @@ public class AddItem
                     {
                         confirm = true;
                     }
+
                     timeout++;
                 } // End of while
+
                 Console.WriteLine("--------");
                 appender(item);
             }
         }
     }
+
 
 
     public class Item
@@ -123,7 +131,7 @@ public class AddItem
         private int itemStock;
         private string itemPurchaseDate;
         private StorageLocations storageLocation;
-
+        private Sourcing sourceLocation;
 
         public string ItemName
         {
@@ -173,11 +181,11 @@ public class AddItem
             set { storageLocation = value; }
         }
         
+        public Sourcing SourceLocation
+        {
+            get { return sourceLocation; }
+            set { sourceLocation = value; }
+        }
     }
-
-
-
-
-
-
+    
 }

@@ -140,18 +140,24 @@ public class StorageLocations
             storageLocation.ParentId = parentID;
             Console.WriteLine("Line 131");
             storageLocation.Children = new List<StorageLocation>();
-            if (sublocations == true)
+            int? subCounter;
+            if (sublocations)
             {
                 for (int i = 0; i < subCount; i++)
                 {
                     StorageLocation subLocation = new StorageLocation();
                     sublocationCount++;
-                    subLocation.Id = idIdx + i + 1;
+                    subLocation.Id = idIdx + i + 1; 
+                    subCounter = subLocation.Id;
                     Console.WriteLine($"Sublocation Name {sublocationCount}: ");
                     subLocation.LocationName = Console.ReadLine();
                     subLocation.ParentId = storageLocation.Id;
                     subLocation.Parent = storageLocation;
                     storageLocation.Children.Add(subLocation);
+                    if (subCounter == 4)
+                    {
+                        Console.Clear();
+                    }
                 }
             }
 
