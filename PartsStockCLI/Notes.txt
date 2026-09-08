@@ -473,4 +473,11 @@ so I need to dig into the error and see what happened still.
 Another note- When collectiong the sublocation names, when there are a lot of sublocations that can fill 
 up the terminal quite quickly. Maybe we should consider clearing it after x amount of names? 
 
+We need to able to use the arrow keys in the terminal during input collection
+
+I realized the crash I hit was because I'm silly; whenever I moved the paths around the other day I forgot add actual
+file creation back and so there weren't any files to be loaded! Ironically I hadn't noticed because I'd been in Storage 
+Locations before this and it had it's old file creation still in it so it seemed as if everything was all good.
+
+Anyway I got through that and the searched returned null and the program crashed again. Time to investigate.
 

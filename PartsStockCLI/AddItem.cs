@@ -7,6 +7,11 @@ public class AddItem
 {
     public void NewItem(string directory, string path, string storagePath)
     {
+        if (!File.Exists(path))
+        {
+            File.Create(path).Close();
+            File.AppendAllText(path, JsonSerializer.Serialize("[ Items: {"));
+        }
         Console.Clear();
         /* caller() collects the input for the new item fields and
          assigns them, appender appends them*/
@@ -15,18 +20,6 @@ public class AddItem
         void appender(Item item)
         {
             bool isNewFile = false;
-            if (!File.Exists(path))
-            {
-                Console.WriteLine("path null");
-                File.Create(path).Close();
-                File.WriteAllText(path, "[]");
-                isNewFile = true;
-                // File.AppendAllText(path, JsonSerializer.Serialize("{ Items: {"))
-            }
-            else
-            {
-                // Console.WriteLine("path already exists");
-            }
             if (isNewFile == true)
             {
                 item.ItemNumber = 1;

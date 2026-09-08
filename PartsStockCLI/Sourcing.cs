@@ -10,6 +10,10 @@ public class Sourcing
     {
         try
         {
+            if (!File.Exists(path))
+            {
+                File.Create(path).Close();
+            }
             bool menuBool = true;
             while (menuBool)
             {

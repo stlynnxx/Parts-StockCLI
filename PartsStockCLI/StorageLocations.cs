@@ -7,26 +7,18 @@ public class StorageLocations
 {
     public void StorageMain(string directory, string path)
     {
-
-        // This needs error handling
-        string storagePath =  Path.Combine(directory, "StorageLocations.json");    
-        
-        if (!File.Exists(storagePath))
+        if (!File.Exists(path))
         {
-            File.Create(storagePath).Close();
-            File.WriteAllText(storagePath, "[]");
+            File.Create(path).Close();
+            File.WriteAllText(path, "[]");
         }
 
-
-        // string borderDashes = "--------";
-
-
-        StorageMenu(storagePath);
+        StorageMenu(path);
 
         // This is where the user decides what they want to do 
         void StorageMenu(string path)
         {
-            string storageMenu = "1)Load Storage Location\n" + 
+            string storageMenu = "1)Load Storage Location\n" +
                                  "2)Edit Storage Location\n" +
                                  "3)Create New Storage Location\n" +
                                  "B)Go back";
@@ -52,7 +44,7 @@ public class StorageLocations
                     break;
             }
         }
-        
+
         // If a user wants to load a location, this menu is called for the load parameter
         void LoadLocationMenu(string path)
         {
@@ -147,7 +139,7 @@ public class StorageLocations
                 {
                     StorageLocation subLocation = new StorageLocation();
                     sublocationCount++;
-                    subLocation.Id = idIdx + i + 1; 
+                    subLocation.Id = idIdx + i + 1;
                     subCounter = subLocation.Id;
                     Console.WriteLine($"Sublocation Name {sublocationCount}: ");
                     subLocation.LocationName = Console.ReadLine();
@@ -161,10 +153,6 @@ public class StorageLocations
                 }
             }
 
-
-
-            Console.WriteLine("Line 146");
-
             if (!File.Exists(path))
             {
                 Console.WriteLine("Line 152");
@@ -172,8 +160,6 @@ public class StorageLocations
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
             }
-
-            Console.WriteLine("Line 169");
 
             loc.Add(storageLocation);
             File.WriteAllText(path, JsonSerializer.Serialize(loc, options));
@@ -187,8 +173,12 @@ public class StorageLocations
     {
         public void search()
         {
-            int lineCounter = 0;
-            string[] appends = new string[50];
+            // Console.WriteLine($"Opening: {Path.GetFullPath(path)} ({new FileInfo(path).Length} bytes)");
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"File not found at {Path.GetFullPath(path)}");
+            }
+
             Console.WriteLine("Enter the name to search by: ");
             string userInput = Console.ReadLine();
             if (userInput == "B")
@@ -197,56 +187,21 @@ public class StorageLocations
                 Program.Main();
             }
 
-            //string loadedFile = LoadList(path);
-            using (StreamReader sr = new StreamReader(path))
+            List<StorageLocation> locations;
+            try
             {
-                string line = sr.ReadLine();
-                // string fullFile = sr.ReadToEnd();
-                // int fileLen =  fullFile.Length;
-                if (line == null)
-                {
-                    Console.WriteLine($"Line Null, line: {line}");
-                }
-
-                while ((line = sr.ReadLine()) != null)
-                {
-                    // Console.WriteLine($"line check: {line}");
-                    // Console.WriteLine("Line check level");
-
-                    if (line.Contains(userInput))
-                    {
-                        appends[0] = line;
-                        int index = 1;
-                                              
-                            while((line = sr.ReadLine()) !=null && index < appends.Length) // Read until the end of the JSON block or array
-                            {
-                                appends[index] = line;
-                                index++;
-
-                                if (line.Trim() == "}" || line.Trim() == "},") // Stop only when the main parent object block closes (e.g., "  }" or "  },") // avoiding early stops on child objects inside the array
-                                {
-                                    break;
-                                }
-                            }
-                            break;
-                                                         
-                    }
-                }
+                string json = File.ReadAllText(path);
+                locations = string.IsNullOrWhiteSpace(json)
+                    ? new()
+                    : JsonSerializer.Deserialize<List<StorageLocation>>(json) ?? new();
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Storage file unreadable: {ex.Message}");
+                return;
             }
 
-            Console.WriteLine("WriteLine Reached");
-            for (int k = 0; k < appends.Length; k++)
-            {
-                if(!string.IsNullOrWhiteSpace(appends[k])) // Only print non empty slots to prevent blank lines
-                {
-                    Console.WriteLine(appends[k]);
-
-                }
-            }
         }
-    }
-//3
-
     }
 
     public class SaveLocation
@@ -270,8 +225,8 @@ public class StorageLocations
 
     public class StorageLocation
     {
-       
-       
+
+
         private string locationName;
         private string details;
         private string locationCity;
@@ -280,46 +235,53 @@ public class StorageLocations
         private string locationType;
         private int? id;
         private int? parentId;
-       
-       [JsonIgnore]
-        public StorageLocation Parent { get; set; }
+
+        [JsonIgnore] public StorageLocation Parent { get; set; }
 
         // Explicit order so parent scalar fields write before Children (STJ defaults to declaration order; Children used to be declared first).
         [JsonPropertyOrder(0)]
-        public string LocationName {
+        public string LocationName
+        {
             get { return this.locationName; }
             set { this.locationName = value; }
         }
+
         [JsonPropertyOrder(1)]
         public int? Id
         {
             get { return this.id; }
             set { this.id = value; }
         }
+
         [JsonPropertyOrder(2)]
         public int? ParentId
         {
             get { return this.parentId; }
-            set {  this.parentId = value; }
+            set { this.parentId = value; }
         }
+
         [JsonPropertyOrder(3)]
-        public string LocationCity {
+        public string LocationCity
+        {
             get { return this.locationCity; }
             set { this.locationCity = value; }
         }
+
         [JsonPropertyOrder(4)]
         public string LocationType
         {
             get { return this.locationType; }
             set { this.locationType = value; }
         }
+
         [JsonPropertyOrder(5)]
         public string Details
         {
             get { return this.details; }
             set { this.details = value; }
         }
-        [JsonPropertyOrder(6)]
-        public List<StorageLocation> Children { get; set; }
+
+        [JsonPropertyOrder(6)] public List<StorageLocation> Children { get; set; }
     }
+}
 
